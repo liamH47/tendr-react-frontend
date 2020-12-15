@@ -8,19 +8,19 @@ class AllIngContainer extends Component {
         ingredientsApi: []
     }
 
-    addToMyIngs = (userIngObj) => {
-        fetch('http://localhost:3000/api/v1/user_ingredients', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "Accepts": "application/json"
-          },
-          body: JSON.stringify(userIngObj)
-        })
-        .then(r => r.json())
-        .then(data => console.log(data))
+    // addToMyIngs = (userIngObj) => {
+    //     fetch('http://localhost:3000/api/v1/user_ingredients', {
+    //       method: 'POST',
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Accepts": "application/json"
+    //       },
+    //       body: JSON.stringify(userIngObj)
+    //     })
+    //     .then(r => r.json())
+    //     .then(newUserIng => this.setState({ ingre}))
     
-      }
+    //   }
 
     componentDidMount() {
         fetch("http://localhost:3000/api/v1/ingredients")
@@ -29,7 +29,7 @@ class AllIngContainer extends Component {
     }
 
     renderIngredients = () => {
-        return this.state.ingredientsApi.map(ingObj => <Ingredient addToMyIngs={this.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+        return this.state.ingredientsApi.map(ingObj => <Ingredient addToMyIngs={this.props.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
     }
     
 

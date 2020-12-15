@@ -12,6 +12,12 @@ class App extends React.Component {
     userIngs: []
   }
 
+  componentDidMount() {
+    fetch('http://localhost:3000/api/v1/user_ingredients')
+    .then(r => r.json())
+    .then(data => this.setState({ userIngs: data}))
+}
+
   addToMyIngs = (userIngObj) => {
     fetch('http://localhost:3000/api/v1/user_ingredients', {
       method: 'POST',
@@ -33,8 +39,8 @@ class App extends React.Component {
         <Header />
         <Navbar />
         <Switch>
-          <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
-          <Route path='/find_ingredients' render={() => <AllIngContainer />} />
+          <Route path='/my_ingredients' render={() => <MyIngrContainer userIngs={this.state.userIngs}/>} />
+          <Route path='/find_ingredients' render={() => <AllIngContainer addToMyIngs={this.addToMyIngs}/>} />
         </Switch>
 
       </div>
