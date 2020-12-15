@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Segment} from 'semantic-ui-react'
-import Ingredient from '../Components/Ingredient';
+import UserIngredient from '../Components/UserIngredient';
 
 class MyIngrContainer extends Component {
 
@@ -8,6 +8,8 @@ class MyIngrContainer extends Component {
     state = {
         userIngApi: []
       }
+
+
 
       deleteHandler = (id) => {
           const currentIngredients = this.state.userIngApi
@@ -30,15 +32,15 @@ class MyIngrContainer extends Component {
     }
 
     
-    renderIngredients = () => {
+    renderMyIngredients = () => {
         let ingredientsArr = this.state.userIngApi
-        return ingredientsArr.map(ingObj => <Ingredient deleteHandler={this.deleteHandler} key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.ingredient.name} image_url={ingObj.ingredient.image_url} />)
+        return ingredientsArr.map(ingObj => <UserIngredient deleteHandler={this.deleteHandler} key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.ingredient.name} image_url={ingObj.ingredient.image_url} />)
     }
 
     render() {
         return (
-            <Segment>
-                {this.renderIngredients()}
+            <Segment basic padded='very' vertical>
+                {this.renderMyIngredients()}
 
             </Segment>
 

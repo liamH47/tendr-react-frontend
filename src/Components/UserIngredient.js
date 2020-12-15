@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import {Card, Image, Button} from 'semantic-ui-react'
 
-class Ingredient extends Component {
+class UserIngredient extends Component {
 
-    state = {
-        ingredient_id: this.props.id,
-        user_id: 2,
-        name: this.props.ingredient.name,
-        category: this.props.ingredient.category,
-        image_url: this.props.ingredient.image_url,
-        running_low: false
-    }
-
-    localAddHandler = (e) => {
-        e.preventDefault()
-        this.props.addToMyIngs(this.state)
+    localDeleteHandler = () => {
+        this.props.deleteHandler(this.props.id)
     }
 
     render() {
@@ -28,12 +18,12 @@ class Ingredient extends Component {
                 </Card.Content>
                 <Button 
                     attached='bottom'
-                    content='Add to My Ingredients'
-                    onClick={this.localAddHandler}
+                    content='remove from ingredients'
+                    onClick={this.localDeleteHandler}
                 />
             </Card>
         );
     }
 }
 
-export default Ingredient;
+export default UserIngredient;
