@@ -4,17 +4,19 @@ import {Card, Image, Button, Form} from 'semantic-ui-react'
 class UserIngredient extends Component {
 
     state = {
-        id: this.props.id,
-        ingredient_id: this.props.ingredient_id,
-        user_id: 2,
-        name: this.props.ingredient.name,
-        category: this.props.ingredient.category,
-        image_url: this.props.ingredient.image_url,
         running_low: false
     }
 
     localDeleteHandler = () => {
         this.props.deleteHandler(this.props.id)
+    }
+
+    displayStock = () => {
+        if(this.state.running_low === false) {
+            return "No"
+        }else {
+            return "Yes"
+        }
     }
 
     localStockCheck = (e) => {
@@ -36,6 +38,7 @@ class UserIngredient extends Component {
                 <Card.Content>
                     <Card.Header>{ingredient.name}</Card.Header>
                     <Card.Content>{ingredient.category}</Card.Content>
+                    <Card.Content>Running Low: {this.displayStock()} </Card.Content>
                 </Card.Content>
                 <Button 
                     attached='bottom'
