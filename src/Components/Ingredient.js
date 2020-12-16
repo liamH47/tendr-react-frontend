@@ -5,11 +5,11 @@ class Ingredient extends Component {
 
     state = {
         ingredient_id: this.props.id,
-        user_id: this.props.user_id,
+        user_id: 2,
         name: this.props.ingredient.name,
         category: this.props.ingredient.category,
         image_url: this.props.ingredient.image_url,
-        running_low: 'No'
+        running_low: false
     };
 
     localAddHandler = (e) => {

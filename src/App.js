@@ -16,21 +16,8 @@ class App extends React.Component {
     fetch('http://localhost:3000/api/v1/user_ingredients')
     .then(r => r.json())
     .then(data => this.setState({ userIngs: data}))
-}
-
-  addToMyIngs = (userIngObj) => {
-    fetch('http://localhost:3000/api/v1/user_ingredients', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify(userIngObj)
-    })
-    .then(r => r.json())
-    .then(newUserIng => this.setState({ userIngs: [...this.state.userIngs, newUserIng] }))
-
   }
+  
 
   render() {
 
@@ -40,7 +27,7 @@ class App extends React.Component {
         <Navbar />
         <Switch>
           <Route path='/my_ingredients' render={() => <MyIngrContainer userIngs={this.state.userIngs}/>} />
-          <Route path='/find_ingredients' render={() => <AllIngContainer addToMyIngs={this.addToMyIngs}/>} />
+          <Route path='/find_ingredients' render={() => <AllIngContainer />} />
         </Switch>
 
       </div>
