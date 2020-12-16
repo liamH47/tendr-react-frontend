@@ -8,15 +8,9 @@ import Navbar from './Components/Navbar'
 
 class App extends React.Component {
 
-  state = {
-    userIngs: []
-  }
 
-  componentDidMount() {
-    fetch('http://localhost:3000/api/v1/user_ingredients')
-    .then(r => r.json())
-    .then(data => this.setState({ userIngs: data}))
-  }
+
+
   
 
   render() {
@@ -26,7 +20,7 @@ class App extends React.Component {
         <Header />
         <Navbar />
         <Switch>
-          <Route path='/my_ingredients' render={() => <MyIngrContainer userIngs={this.state.userIngs}/>} />
+          <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
           <Route path='/find_ingredients' render={() => <AllIngContainer />} />
         </Switch>
 

@@ -9,6 +9,12 @@ class MyIngrContainer extends Component {
         userIngApi: []
       }
 
+      componentDidMount() {
+        fetch('http://localhost:3000/api/v1/user_ingredients')
+        .then(r => r.json())
+        .then(data => this.setState({ userIngApi: data}))
+      }
+
       
       deleteHandler = (id) => {
           const currentIngredients = this.state.userIngApi
@@ -22,10 +28,6 @@ class MyIngrContainer extends Component {
                 this.setState({ userIngApi: newArr})
             })
             .catch(console.log)
-        }
-        
-        componentDidMount() {
-            this.setState({ userIngApi: this.props.userIngs})
         }
         
         
