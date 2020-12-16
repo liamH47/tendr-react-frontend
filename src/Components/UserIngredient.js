@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
-import {Card, Image, Button, Form} from 'semantic-ui-react'
+import {Card, Image, Button} from 'semantic-ui-react'
 
 class UserIngredient extends Component {
 
     state = {
-        running_low: false
+        running_low: false ,
+        display_low: "No"
     }
 
     localDeleteHandler = () => {
         this.props.deleteHandler(this.props.id)
     }
 
-    displayStock = () => {
-        if(this.state.running_low === false) {
-            return "No"
-        }else {
-            return "Yes"
-        }
-    }
+    // displayStock = () => {
+    //     if(this.state.running_low === false) {
+    //         return "No"
+    //     }else if(this.state.running_low === true){
+    //         return "Yes"
+    //     }
+    // }
 
-    localStockCheck = (e) => {
-        e.preventDefault()
+    componentDidMount() {
+        this.setState({ running_low: this.props.running_low })
+    }
+    
+
+    localStockCheck = () => {
         if(this.state.running_low === false) {
-            this.setState({ running_low: true})
+            this.setState({ running_low: true, display_low: "Yes"})
         } else {
-            this.setState({ running_low: false})
+            this.setState({ running_low: false, display_low: "No"})
         }
         this.props.stockCheck(this.state.running_low, this.props.id )
 
@@ -38,7 +43,7 @@ class UserIngredient extends Component {
                 <Card.Content>
                     <Card.Header>{ingredient.name}</Card.Header>
                     <Card.Content>{ingredient.category}</Card.Content>
-                    <Card.Content>Running Low: {this.displayStock()} </Card.Content>
+                    <Card.Content>Running Low: {this.state.display_low} </Card.Content>
                 </Card.Content>
                 <Button 
                     attached='bottom'
