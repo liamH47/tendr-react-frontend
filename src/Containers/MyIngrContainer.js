@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
-import {Segment} from 'semantic-ui-react'
+import {Segment, Container} from 'semantic-ui-react'
+import Cocktail from '../Components/Cocktail';
 import UserIngredient from '../Components/UserIngredient';
 
 class MyIngrContainer extends Component {
 
 
     state = {
-        userIngApi: []
+        userIngApi: [],
+        userCocktails: []
       }
 
       componentDidMount() {
+        this.getUserIngs()
+        this.getCocktails()
+      }
+
+      getUserIngs = () => {
         fetch('http://localhost:3000/api/v1/user_ingredients')
         .then(r => r.json())
         .then(data => this.setState({ userIngApi: data}))
       }
 
+      getCocktails = () => {
+          fetch('http://localhost:3000/api/v1/cocktails')
+          .then(r => r.json())
+          .then(data => this.setState({ userCocktails: data}))
+      }
       
       deleteHandler = (id) => {
           const currentIngredients = this.state.userIngApi
@@ -27,7 +39,7 @@ class MyIngrContainer extends Component {
                 let newArr = [...this.state.userIngApi]
                 this.setState({ userIngApi: newArr})
             })
-            .catch(console.log)
+            .catch(console.log(this.state.userCocktails))
         }
 
         stockCheck = (running_low, id) => {
@@ -51,6 +63,10 @@ class MyIngrContainer extends Component {
             .catch(console.log)
         };
         
+        renderCocktails = () => {
+            let cocktailArr = this.state.userCocktails
+            return cocktailArr.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        }
         
         renderMyIngredients = () => {
             let ingredientsArr = this.state.userIngApi
@@ -59,10 +75,17 @@ class MyIngrContainer extends Component {
         
         render() {
             return (
+                <Container>
                 <Segment basic padded='very' vertical>
-                {this.renderMyIngredients()}
+                    <h2>Current Ingredients</h2>
+                    {this.renderMyIngredients()}
+                </Segment>
+                <Segment basic padded='very' vertical>
 
-            </Segment>
+                </Segment>
+                    <h2>Possible Drinks</h2>
+                    {this.renderCocktails()}
+                </Container>
             );
         }
 }
