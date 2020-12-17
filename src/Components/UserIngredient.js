@@ -7,20 +7,35 @@ class UserIngredient extends Component {
         running_low: this.props.ingredient.running_low
     }
     
-    boolToggle = () => {
-        console.log("clicking")
-        this.setState({ running_low: !this.state.running_low })
-        this.props.stockCheck(this.state.running_low, this.props.id)
-    }
+
     
     localDeleteHandler = () => {
         this.props.deleteHandler(this.props.id)
     }
-    // componentDidMount() {
-    //     // this.setState({ running_low: this.props.ingredient.running_low })
-    //     debugger
-    // }
+
+    componentDidMount() {
+        console.log("before cdm", this.state)
+        this.setState({ running_low: this.props.ingredient.running_low})
+        console.log("after cdm", this.state)
+    }
+
+
     
+    
+    handleRunLow = () => {
+        fetch(`http://localhost:3000/api/v1/user_ingredients/${this.props.id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            },
+            body: JSON.stringify({...this.props.ingredient, running_low: !this.state.running_low})
+        })
+        .then(r => r.json())
+        .then(ingredient => {this.setState({ running_low: ingredient.running_low})})
+        .catch(console.log)
+        
+    }
 
 
     render() {
@@ -42,7 +57,7 @@ class UserIngredient extends Component {
                         // type='submit' 
                         attached='bottom'
                         content='Running Low?'
-                        onClick={this.boolToggle}
+                        onClick={this.handleRunLow}
                     />
             </Card>
         );
