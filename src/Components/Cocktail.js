@@ -6,7 +6,11 @@ class Cocktail extends Component {
         const {cocktail} = this.props 
         return (
             <Card>
-                <Image src={cocktail.image_url} /> 
+                <Image src={cocktail.image_url} />
+                <Card.Content>
+                    <Card.Header>{cocktail.name}</Card.Header>
+                </Card.Content>
+
             </Card>
         );
     }

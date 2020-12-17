@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import {Segment, Container} from 'semantic-ui-react'
 import Cocktail from '../Components/Cocktail';
 import UserIngredient from '../Components/UserIngredient';
@@ -64,10 +65,16 @@ class MyIngrContainer extends Component {
         };
         
         renderCocktails = () => {
-            let cocktailArr = this.state.userCocktails
-            return cocktailArr.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+            let ids = this.state.userIngApi.map(obj => obj.ingredient_id)
+            console.log(ids)
+            let cocktails = this.state.userCocktails
+            let filtered = cocktails.filter((cocktail) => ids.includes(cocktail.ingredients[0].id))
+            return filtered.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
         }
-        
+        // let filteredArr = cocktails.filter(cocktail => cocktail.)
+
+
+
         renderMyIngredients = () => {
             let ingredientsArr = this.state.userIngApi
             return ingredientsArr.map(ingObj => <UserIngredient stockCheck={this.stockCheck} deleteHandler={this.deleteHandler} key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.name} image_url={ingObj.image_url} />)
@@ -81,16 +88,16 @@ class MyIngrContainer extends Component {
                     {this.renderMyIngredients()}
                 </Segment>
                 <Segment basic padded='very' vertical>
-
-                </Segment>
                     <h2>Possible Drinks</h2>
                     {this.renderCocktails()}
+
+                </Segment>
                 </Container>
             );
         }
 }
 
-export default MyIngrContainer
+export default withRouter(MyIngrContainer)
 
 
   //maybe put whole userIngredient in state and pass that as first argument, similar to in post request
