@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Image, Button} from 'semantic-ui-react'
+import {Card, Image, Button, Icon} from 'semantic-ui-react'
 
 class UserIngredient extends Component {
 
@@ -20,7 +20,23 @@ class UserIngredient extends Component {
     }
 
 
-    
+    checkRunLow = () => {
+        if(this.state.running_low) {
+            return "Mark fully stocked"
+        } else {
+            return "Running Low?"
+        }
+    }
+
+    showStock = () => {
+        if(this.state.running_low) {
+            return <Icon color='red' size='big' name='exclamation circle' />
+        } else {
+            return <Icon color='green' size='big' name='check circle' />
+        }
+    }
+
+    //potential icons: battery low/high, attention/check
     
     handleRunLow = () => {
         fetch(`http://localhost:3000/api/v1/user_ingredients/${this.props.id}`, {
@@ -46,6 +62,7 @@ class UserIngredient extends Component {
                 <Card.Content>
                     <Card.Header>{ingredient.name}</Card.Header>
                     <Card.Content>{ingredient.category}</Card.Content>
+                    <Card.Content>Stock: {this.showStock()}</Card.Content>
                 </Card.Content>
                 <Button 
                     attached='bottom'
@@ -53,12 +70,9 @@ class UserIngredient extends Component {
                     onClick={this.localDeleteHandler}
                 />
 
-                    <Button
-                        // type='submit' 
-                        attached='bottom'
-                        content='Running Low?'
-                        onClick={this.handleRunLow}
-                    />
+                    <Button attached='bottom' onClick={this.handleRunLow}>
+                        {this.checkRunLow()}
+                    </Button>
             </Card>
         );
     }

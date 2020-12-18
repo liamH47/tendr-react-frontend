@@ -14,7 +14,9 @@ class MyIngrContainer extends Component {
 
       componentDidMount() {
         this.getUserIngs()
+        // this.setState({ userIngApi: this.props.userIngApi})
         this.getCocktails()
+        // console.log(this.state)
       }
 
       getUserIngs = () => {
