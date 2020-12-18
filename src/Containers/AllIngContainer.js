@@ -5,7 +5,7 @@ import Ingredient from '../Components/Ingredient'
 class AllIngContainer extends Component {
 
     state = {
-        ingredientsApi: []
+        ingredientsApi: [],
     }
 
     addToMyIngs = (userIngObj) => {
@@ -17,15 +17,21 @@ class AllIngContainer extends Component {
           },
           body: JSON.stringify(userIngObj)
         })
-        .then(r => r.json())
-        .then(data => console.log(data))
+        // .then(r => r.json())
+        // .then(data => console.log(data))
     
     }
 
-    componentDidMount() {
+    getIngredients = () => {
         fetch("http://localhost:3000/api/v1/ingredients")
         .then(r => r.json())
         .then(data => this.setState({ ingredientsApi: data}))
+
+    }
+ 
+    componentDidMount() {
+        this.getIngredients()
+        console.log(this.state)
     }
 
     renderIngredients = () => {
