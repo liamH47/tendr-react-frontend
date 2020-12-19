@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react'
 import Ingredient from '../Components/Ingredient'
+import { connect } from 'react-redux'
+import {getIngredients} from'../Redux/actions'
 
 class AllIngContainer extends Component {
 
@@ -22,20 +24,21 @@ class AllIngContainer extends Component {
     
     }
 
-    getIngredients = () => {
-        fetch("http://localhost:3000/api/v1/ingredients")
-        .then(r => r.json())
-        .then(data => this.setState({ ingredientsApi: data}))
+    // getIngredients = () => {
+    //     fetch("http://localhost:3000/api/v1/ingredients")
+    //     .then(r => r.json())
+    //     .then(data => this.setState({ ingredientsApi: data}))
 
-    }
+    // }
  
     componentDidMount() {
-        this.getIngredients()
-        console.log(this.state)
+        this.props.fetchIngredients()
+        // this.getIngredients()
+        // console.log(this.state)
     }
 
     renderIngredients = () => {
-        return this.state.ingredientsApi.map(ingObj => <Ingredient addToMyIngs={this.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+        return this.props.ingredientsApi.map(ingObj => <Ingredient addToMyIngs={this.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
     }
 
 
@@ -48,4 +51,11 @@ class AllIngContainer extends Component {
     }
 }
 
-export default AllIngContainer
+    function mdp(dispatch){
+        return {fetchIngredients: () => dispatch(getIngredients())}
+    }
+    function msp(state){
+        return {ingredientsApi: state.ingredientsApi}
+    }
+
+export default connect(msp, mdp)(AllIngContainer)
