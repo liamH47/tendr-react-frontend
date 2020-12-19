@@ -17,8 +17,19 @@ function runLowReducer(state = defaultState.running_low, action) {
     }
 }
 
+function ingredientsReducer(state = defaultState.ingredientsApi, action) {
+    switch (action.type) {
+        case "FETCH_INGREDIENTS":
+            console.log("inside of ingredients reducer", action.payload)
+            return action.payload
+        default:
+            return state 
+    }
+}
+
 const rootReducer = combineReducers({
-    running_low: runLowReducer
+    running_low: runLowReducer,
+    ingredientsApi: ingredientsReducer
 })
 
 export default rootReducer
