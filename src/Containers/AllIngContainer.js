@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react'
 import Ingredient from '../Components/Ingredient'
 import { connect } from 'react-redux'
-import {getIngredients} from'../Redux/actions'
+import {getIngredients} from '../Redux/actions'
 
 class AllIngContainer extends Component {
 
@@ -19,17 +19,8 @@ class AllIngContainer extends Component {
           },
           body: JSON.stringify(userIngObj)
         })
-        // .then(r => r.json())
-        // .then(data => console.log(data))
     
     }
-
-    // getIngredients = () => {
-    //     fetch("http://localhost:3000/api/v1/ingredients")
-    //     .then(r => r.json())
-    //     .then(data => this.setState({ ingredientsApi: data}))
-
-    // }
  
     componentDidMount() {
         this.props.fetchIngredients()
@@ -40,6 +31,9 @@ class AllIngContainer extends Component {
     renderIngredients = () => {
         return this.props.ingredientsApi.map(ingObj => <Ingredient addToMyIngs={this.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
     }
+
+    //perhaps change it so that only ingredients that aren't in the user's inventory already
+    //are rendered
 
 
     render() {
