@@ -1,4 +1,4 @@
-import { FETCH_INGREDIENTS } from './actionTypes'
+import { ADD_USER_INGREDIENT, FETCH_INGREDIENTS } from './actionTypes'
 import { FETCH_USER_INGREDIENTS } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -21,4 +21,23 @@ export function getUserIngredients() {
         .then(r => r.json())
         .then(data => dispatch({type: FETCH_USER_INGREDIENTS, payload: data}))
     }
+}
+
+
+
+export function addIngredient(userIngObj){
+    return function (dispatch) {
+        fetch('http://localhost:3000/api/v1/user_ingredients', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+          },
+          body: JSON.stringify(userIngObj)
+        })
+        .then(r => r.json())
+        .then(obj => dispatch({ type: ADD_USER_INGREDIENT, payload: obj}))
+
+    }
+
 }
