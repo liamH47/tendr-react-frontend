@@ -14,12 +14,16 @@ class AllIngContainer extends Component {
     }
 
     renderIngredients = () => {
-        let ids = this.props.userIngApi.map(obj => obj.ingredient_id)
-        let ingredients = this.props.ingredientsApi
-        let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
-
-        console.log("in render", this.props.userIngApi);
-        return filtered.map(ingObj => <Ingredient addToMyIngs={this.addToMyIngs} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+        if(this.props.userIngApi.length > 0) {
+            let ids = this.props.userIngApi.map(obj => obj.ingredient_id)
+            let ingredients = this.props.ingredientsApi
+            let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
+    
+            console.log("in render", this.props.userIngApi);
+            return filtered.map(ingObj => <Ingredient ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+        } else {
+            return this.props.ingredientsApi.map(ingObj => <Ingredient ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+        }
     }
 
     //perhaps change it so that only ingredients that aren't in the user's inventory already

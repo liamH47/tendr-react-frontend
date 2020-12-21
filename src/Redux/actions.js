@@ -1,5 +1,9 @@
-import { ADD_USER_INGREDIENT, FETCH_INGREDIENTS } from './actionTypes'
-import { FETCH_USER_INGREDIENTS } from './actionTypes'
+import { 
+    ADD_USER_INGREDIENT, 
+    FETCH_INGREDIENTS, 
+    DELETE_USER_INGREDIENT, 
+    FETCH_USER_INGREDIENTS 
+} from './actionTypes'
 
 export function toggleRunningLow() {
     return { type: "TOGGLE_RUNNING_LOW" }
@@ -40,4 +44,19 @@ export function addIngredient(userIngObj){
 
     }
 
+}
+
+export function deleteIngredient(id) {
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/user_ingredients/${id}`, {
+            method: 'DELETE'
+        })
+        .then(() => {dispatch({
+            type: DELETE_USER_INGREDIENT,
+            payload:{},
+        })
+    })
+    //     .then(() => {dispatch({ type: DELETE_USER_INGREDIENT, payload: {},}))
+    // }
+    }
 }

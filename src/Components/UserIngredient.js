@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Image, Button, Icon} from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { deleteIngredient } from '../Redux/actions'
 
 class UserIngredient extends Component {
 
@@ -7,10 +9,8 @@ class UserIngredient extends Component {
         running_low: this.props.ingredient.running_low
     }
     
-
-    
     localDeleteHandler = () => {
-        this.props.deleteHandler(this.props.id)
+        this.props.localDeleteHandler(this.props.id)
     }
 
     componentDidMount() {
@@ -18,7 +18,6 @@ class UserIngredient extends Component {
         this.setState({ running_low: this.props.ingredient.running_low})
         console.log("after cdm", this.state)
     }
-
 
     checkRunLow = () => {
         if(this.state.running_low) {
@@ -35,8 +34,6 @@ class UserIngredient extends Component {
             return <Icon color='green' size='big' name='check circle' />
         }
     }
-
-    //potential icons: battery low/high, attention/check
     
     handleRunLow = () => {
         fetch(`http://localhost:3000/api/v1/user_ingredients/${this.props.id}`, {
@@ -52,7 +49,6 @@ class UserIngredient extends Component {
         .catch(console.log)
         
     }
-
 
     render() {
         const {ingredient} = this.props
@@ -78,4 +74,8 @@ class UserIngredient extends Component {
     }
 }
 
-export default UserIngredient; 
+function mapDispatchToProps(dispatch) {
+    return {localDeleteHandler: (id) => dispatch(deleteIngredient(id))}
+}
+
+export default connect(null, mapDispatchToProps)(UserIngredient); 
