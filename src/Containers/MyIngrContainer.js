@@ -35,11 +35,13 @@ class MyIngrContainer extends Component {
       }
       
       deleteHandler = (id) => {
-          const currentIngredients = this.state.userIngApi
-          this.setState({ userIngApi: currentIngredients.filter(userIng => userIng.id !== id)})
+        //   const currentIngredients = this.props.userIngApi
+        //   this.setState({ userIngApi: currentIngredients.filter(userIng => userIng.id !== id)})
           fetch(`http://localhost:3000/api/v1/user_ingredients/${id}`, {
               method: 'DELETE',
             })
+
+        this.props.fetchUserIngredients()
         }
 
         

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react'
 import Ingredient from '../Components/Ingredient'
 import { connect } from 'react-redux'
-import {getIngredients} from '../Redux/actions'
+import {getIngredients, addIngredient} from '../Redux/actions'
 
 class AllIngContainer extends Component {
 
@@ -10,17 +10,17 @@ class AllIngContainer extends Component {
         ingredientsApi: [],
     }
 
-    addToMyIngs = (userIngObj) => {
-        fetch('http://localhost:3000/api/v1/user_ingredients', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "Accepts": "application/json"
-          },
-          body: JSON.stringify(userIngObj)
-        })
+    // addToMyIngs = (userIngObj) => {
+    //     fetch('http://localhost:3000/api/v1/user_ingredients', {
+    //       method: 'POST',
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Accepts": "application/json"
+    //       },
+    //       body: JSON.stringify(userIngObj)
+    //     })
     
-    }
+    // }
  
     componentDidMount() {
         this.props.fetchIngredients()
@@ -46,7 +46,10 @@ class AllIngContainer extends Component {
 }
 
     function mdp(dispatch){
-        return {fetchIngredients: () => dispatch(getIngredients())}
+        return {
+            fetchIngredients: () => dispatch(getIngredients()),
+
+        }
     }
     function msp(state){
         return {ingredientsApi: state.ingredientsApi}

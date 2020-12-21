@@ -29,6 +29,8 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
     switch (action.type) {
         case "FETCH_USER_INGREDIENTS":
             return action.payload
+        case "ADD_USER_INGREDIENT":
+            return [...state, action.payload]
         default:
             return state 
     }

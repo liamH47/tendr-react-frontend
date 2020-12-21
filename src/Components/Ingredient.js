@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Image, Button} from 'semantic-ui-react'
-
+import { addIngredient } from '../Redux/actions';
+import { connect } from 'react-redux'
 class Ingredient extends Component {
 
     state = {
@@ -14,7 +15,7 @@ class Ingredient extends Component {
 
     localAddHandler = (e) => {
         e.preventDefault()
-        this.props.addToMyIngs(this.state)
+        this.props.localAddHandler(this.state)
     }
 
     render() {
@@ -35,5 +36,9 @@ class Ingredient extends Component {
         );
     }
 }
+function mapDispatchToProps(dispatch){
+    return {localAddHandler: (userIngObj) => dispatch(addIngredient(userIngObj))}
+}
 
-export default Ingredient;
+
+export default connect(null, mapDispatchToProps)(Ingredient)
