@@ -31,6 +31,9 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
             return action.payload
         case "ADD_USER_INGREDIENT":
             return [...state, action.payload]
+        case "DELETE_USER_INGREDIENT":
+            const ingredients = state.filter(obj => obj.id !==action.id)
+            return { ...state, ingredients }
         default:
             return state 
     }
