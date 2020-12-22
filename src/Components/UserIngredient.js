@@ -14,9 +14,7 @@ class UserIngredient extends Component {
     }
 
     componentDidMount() {
-        console.log("before cdm", this.state)
         this.setState({ running_low: this.props.ingredient.running_low})
-        console.log("after cdm", this.state)
     }
 
     checkRunLow = () => {
@@ -78,4 +76,8 @@ function mapDispatchToProps(dispatch) {
     return {localDeleteHandler: (id) => dispatch(deleteIngredient(id))}
 }
 
-export default connect(null, mapDispatchToProps)(UserIngredient); 
+function mapStateToProps(state){
+    return {userIngApi: state.userIngApi}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserIngredient); 

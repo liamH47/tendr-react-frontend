@@ -32,8 +32,19 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
         case "ADD_USER_INGREDIENT":
             return [...state, action.payload]
         case "DELETE_USER_INGREDIENT":
-            const ingredients = state.filter(obj => obj.id !==action.id)
-            return { ...state, ingredients }
+            console.log("payload", action.payload);
+            let copyState = [...state]
+            const index = copyState.findIndex(obj => obj.id === action.payload)
+            console.log(index, copyState);
+            copyState.splice(index, 1)
+            console.log(copyState);
+            return copyState
+            //.slice deletes the correct one but needs a refresh 
+            //.splice deletes them one by one but does not always delete the right one
+            // let ingredients = state.filter(obj => obj.id !== action.payload.id)
+            // return { ...state, ingredients } request goes through but all ingredients are removed until refresh
+
+
         default:
             return state 
     }

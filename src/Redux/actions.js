@@ -51,12 +51,11 @@ export function deleteIngredient(id) {
         fetch(`http://localhost:3000/api/v1/user_ingredients/${id}`, {
             method: 'DELETE'
         })
-        .then(() => {dispatch({
-            type: DELETE_USER_INGREDIENT,
-            payload:{},
+        .then(data => {
+            dispatch({type: DELETE_USER_INGREDIENT, payload: id})
+            console.log("inside fetch", data);
+
         })
-    })
-    //     .then(() => {dispatch({ type: DELETE_USER_INGREDIENT, payload: {},}))
-    // }
+        ;
     }
 }
