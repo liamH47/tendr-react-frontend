@@ -4,7 +4,7 @@ import {Segment, Container} from 'semantic-ui-react'
 import Cocktail from '../Components/Cocktail';
 import UserIngredient from '../Components/UserIngredient';
 import { connect } from 'react-redux'
-import {getUserIngredients} from '../Redux/actions'
+import {getUserIngredients, getCocktails} from '../Redux/actions'
 
 class MyIngrContainer extends Component {
 
@@ -16,30 +16,14 @@ class MyIngrContainer extends Component {
 
       componentDidMount() {
         this.props.fetchUserIngredients()
-        this.getCocktails()
+        this.props.fetchCocktails()
       }
-
-      getCocktails = () => {
-          fetch('http://localhost:3000/api/v1/cocktails')
-          .then(r => r.json())
-          .then(data => this.setState({ userCocktails: data}))
-      }
-      
-    //   deleteHandler = (id) => {
-    //     //   this.setState({ userIngApi: currentIngredients.filter(userIng => userIng.id !== id)})
-    //       fetch(`http://localhost:3000/api/v1/user_ingredients/${id}`, {
-    //           method: 'DELETE',
-    //         })
-
-    //     // this.props.fetchUserIngredients()
-    //     }
-
         
         renderCocktails = () => {
             if(this.props.userIngApi.length > 0) {
                 let ids = this.props.userIngApi.map(obj => obj.ingredient_id)
                 console.log(ids)
-                let cocktails = this.state.userCocktails
+                let cocktails = this.props.cocktailsApi
                 let filtered = cocktails.filter((cocktail) => ids.includes(cocktail.ingredients[0].id))
                 return filtered.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
 
@@ -74,10 +58,16 @@ class MyIngrContainer extends Component {
 }
 
 function mdp(dispatch){
-    return {fetchUserIngredients: () => dispatch(getUserIngredients())}
+    return {
+        fetchUserIngredients: () => dispatch(getUserIngredients()),
+        fetchCocktails: () => dispatch(getCocktails())
+    }
 }
 function msp(state){
-    return {userIngApi: state.userIngApi}
+    return {
+        userIngApi: state.userIngApi,
+        cocktailsApi: state.cocktailsApi
+    }
 }
 
 export default connect(msp, mdp)(MyIngrContainer)

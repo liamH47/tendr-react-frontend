@@ -3,7 +3,7 @@ import {combineReducers} from 'redux'
 const defaultState = {
     running_low: false,
     userIngApi: [],
-    userCocktails: [],
+    cocktailsApi: [],
     ingredientsApi: []
 }
 
@@ -24,6 +24,16 @@ function ingredientsReducer(state = defaultState.ingredientsApi, action) {
             return state 
     }
 }
+
+function cocktailsReducer(state = defaultState.cocktailsApi, action) {
+    switch (action.type) {
+        case "FETCH_COCKTAILS":
+            return action.payload
+        default:
+            return state 
+    }
+}
+
 
 function userIngredientsReducer(state = defaultState.userIngApi, action) {
     switch (action.type) {
@@ -53,7 +63,8 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
 const rootReducer = combineReducers({
     running_low: runLowReducer,
     ingredientsApi: ingredientsReducer,
-    userIngApi: userIngredientsReducer
+    userIngApi: userIngredientsReducer,
+    cocktailsApi: cocktailsReducer
 })
 
 export default rootReducer

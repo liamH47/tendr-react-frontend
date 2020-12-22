@@ -2,7 +2,8 @@ import {
     ADD_USER_INGREDIENT, 
     FETCH_INGREDIENTS, 
     DELETE_USER_INGREDIENT, 
-    FETCH_USER_INGREDIENTS 
+    FETCH_USER_INGREDIENTS,
+    FETCH_COCKTAILS
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -10,7 +11,6 @@ export function toggleRunningLow() {
 }
 
 export function getIngredients() {
-    console.log("inside action creator")
     return function(dispatch) {
         fetch('http://localhost:3000/api/v1/ingredients')
         .then(r => r.json())
@@ -19,11 +19,18 @@ export function getIngredients() {
 }
 
 export function getUserIngredients() {
-    console.log("inside action creator")
     return function(dispatch) {
         fetch('http://localhost:3000/api/v1/user_ingredients')
         .then(r => r.json())
         .then(data => dispatch({type: FETCH_USER_INGREDIENTS, payload: data}))
+    }
+}
+
+export function getCocktails() {
+    return function(dispatch) {
+        fetch('http://localhost:3000/api/v1/cocktails')
+        .then(r => r.json())
+        .then(data => dispatch({type: FETCH_COCKTAILS, payload: data}))
     }
 }
 
@@ -61,12 +68,12 @@ export function deleteIngredient(id) {
 }
 
 
-// Function (desired_cocktail, my_ingrdients) {
-//     desired_cocktail_ingredients = desired_cocktail.ingredients	
-//     for ingredient in desired_cocktail_ingredients {		
+// Function checkCanMake(cocktail, userIngApi) {
+//     let cocktailIngredients = cocktail.ingredients	
+//     for ingredient in cocktailIngredients {		
 //         let has_ingredient = false		
-//         for owned_ingredient in my_ingredients {
-//             if (ingredient.type == owned_ingredient.type and ingredient.quantity <= owned_ingredient.quantity) {
+//         for owned_ingredient in userIngApi {
+//             if (ingredient.name == owned_ingredient.and && ingredient.quantity <= owned_ingredient.quantity) {
 //                 has_ingredient = true								
 //             }		
 //         }
