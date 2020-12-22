@@ -10,6 +10,7 @@ class Ingredient extends Component {
         name: this.props.ingredient.name,
         category: this.props.ingredient.category,
         image_url: this.props.ingredient.image_url,
+        quantity: this.props.ingredient.quantity,
         running_low: false
     };
 
