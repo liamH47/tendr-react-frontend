@@ -4,19 +4,44 @@ import { addIngredient } from '../Redux/actions';
 import { connect } from 'react-redux'
 class Ingredient extends Component {
 
-    state = {
-        ingredient_id: this.props.id,
-        user_id: 2,
-        name: this.props.ingredient.name,
-        category: this.props.ingredient.category,
-        image_url: this.props.ingredient.image_url,
-        quantity: this.props.ingredient.quantity,
-        running_low: false
-    };
+    // state = {
+    //     ingredient_id: this.props.id,
+    //     user_id: 2,
+    //     name: this.props.ingredient.name,
+    //     category: this.props.ingredient.category,
+    //     image_url: this.props.ingredient.image_url,
+    //     quantity: this.props.ingredient.quantity,
+    //     unit: this.props.ingredient.unit,
+    //     running_low: false
+    // };
+
+    // postObj = {
+    //     ingredient_id: this.props.ingredient.id,
+    //     user_id: this.props.userId,
+    //     name: this.props.ingredient.name,
+    //     category: this.props.ingredient.category,
+    //     image_url: this.props.ingredient.image_url,
+    //     quantity: this.props.ingredient.quantity,
+    //     unit: this.props.ingredient.unit,
+    //     running_low: false
+    // }
+
+    componentDidMount() {
+        console.log("in ingredient cdm", this.props.ingredient.quantity)
+    }
+    
 
     localAddHandler = (e) => {
         e.preventDefault()
-        this.props.localAddHandler(this.state)
+        this.props.localAddHandler({
+            ingredient_id: this.props.ingredient.id,
+            user_id: 1,
+            name: this.props.ingredient.name,
+            category: this.props.ingredient.category,
+            image_url: this.props.ingredient.image_url,
+            quantity: this.props.ingredient.quantity,
+            unit: this.props.ingredient.unit
+        })
     }
 
     render() {
