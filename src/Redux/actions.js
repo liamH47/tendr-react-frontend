@@ -47,7 +47,10 @@ export function addIngredient(userIngObj){
           body: JSON.stringify(userIngObj)
         })
         .then(r => r.json())
-        .then(obj => dispatch({ type: ADD_USER_INGREDIENT, payload: obj}))
+        .then(obj => {
+            dispatch({ type: ADD_USER_INGREDIENT, payload: obj})
+            console.log("inside post", obj)
+            })
 
     }
 
@@ -73,7 +76,7 @@ export function deleteIngredient(id) {
 //     for ingredient in cocktailIngredients {		
 //         let has_ingredient = false		
 //         for owned_ingredient in userIngApi {
-//             if (ingredient.name == owned_ingredient.and && ingredient.quantity <= owned_ingredient.quantity) {
+//             if (ingredient.name == owned_ingredient.name && ingredient.quantity <= owned_ingredient.quantity) {
 //                 has_ingredient = true								
 //             }		
 //         }
@@ -88,3 +91,7 @@ export function deleteIngredient(id) {
 // function generate_name(ingredient) {
 //     return ingredient.quantity + "oz " + ingredient.name;
 // }
+
+// function checkCanMake(cocktailsApi, userIngApi) {
+//     for 
+//}

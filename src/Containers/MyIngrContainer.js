@@ -9,10 +9,10 @@ import {getUserIngredients, getCocktails} from '../Redux/actions'
 class MyIngrContainer extends Component {
 
 
-    state = {
-        userIngApi: [],
-        userCocktails: []
-      }
+    // state = {
+    //     userIngApi: [],
+    //     userCocktails: []
+    //   }
 
       componentDidMount() {
         this.props.fetchUserIngredients()
@@ -20,24 +20,28 @@ class MyIngrContainer extends Component {
       }
         
         renderCocktails = () => {
-            if(this.props.userIngApi.length > 0) {
-                let ids = this.props.userIngApi.map(obj => obj.ingredient_id)
-                console.log(ids)
-                let cocktails = this.props.cocktailsApi
-                let filtered = cocktails.filter((cocktail) => ids.includes(cocktail.ingredients[0].id))
-                return filtered.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+           let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === true)
+           return filtered.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        }
 
-            }
+        checkCanMake(singleCockt, userIngApi) {
+            let cocktail = singleCockt.cocktail_ingredients
+            return cocktail.every(function(ing) {
+             return userIngApi.some(function(ing2) {
+               console.log(ing.name, ing2.name)
+               console.log(ing.quantity, ing2.quantity)
+                return (ing.name == ing2.name) && (ing.quantity <= ing2.quantity) 
+              })
+            })
         }
 
 
-
         renderMyIngredients = () => {
-            if(this.props.userIngApi.length > 0){
-                return this.props.userIngApi.map(ingObj => <UserIngredient deleteHandler={this.deleteHandler} key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.name} image_url={ingObj.image_url} />)
-            } else {
-                return "time to go shopping"
-            }
+            // if(this.props.userIngApi.length > 0){
+                return this.props.userIngApi.map(ingObj => <UserIngredient key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.name} image_url={ingObj.image_url} />)
+            // } else {
+            //     return "time to go shopping"
+            // }
         }
         
         render() {
@@ -71,11 +75,3 @@ function msp(state){
 }
 
 export default connect(msp, mdp)(MyIngrContainer)
-
-
-  //maybe put whole userIngredient in state and pass that as first argument, similar to in post request
-
-//   {
-//     let newArr = [...this.state.userIngApi]
-//     this.setState({ userIngApi: newArr})
-// })

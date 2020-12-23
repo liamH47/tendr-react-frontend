@@ -20,7 +20,7 @@ class AllIngContainer extends Component {
             let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
     
             console.log("in render", this.props.userIngApi);
-            return filtered.map(ingObj => <Ingredient ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            return filtered.map(ingObj => <Ingredient ingredient={ingObj} userId={2} key={ingObj.id} id={ingObj.id} />)
         } else {
             return this.props.ingredientsApi.map(ingObj => <Ingredient ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
         }
