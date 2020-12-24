@@ -26,9 +26,9 @@ class Ingredient extends Component {
     //     running_low: false
     // }
 
-    componentDidMount() {
-        console.log("in ingredient cdm", this.props.ingredient.quantity)
-    }
+    // componentDidMount() {
+    //     console.log("in ingredient cdm", this.props.ingredient.quantity)
+    // }
     
 
     localAddHandler = (e) => {
@@ -50,7 +50,7 @@ class Ingredient extends Component {
             <Card>
                 <Image src={ingredient.image_url} />
                 <Card.Content>
-                    <Card.Header>{ingredient.name}</Card.Header>
+                    <Card.Header inverted>{ingredient.name}</Card.Header>
                     <Card.Content>{ingredient.category}</Card.Content>
                 </Card.Content>
                 <Button 
