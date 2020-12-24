@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Segment, Container} from 'semantic-ui-react'
+import {Segment, Container, Card} from 'semantic-ui-react'
 import Cocktail from '../Components/Cocktail';
 import UserIngredient from '../Components/UserIngredient';
 import { connect } from 'react-redux'
@@ -49,13 +49,15 @@ class MyIngrContainer extends Component {
                 <Container>
                 <Segment basic padded='very' vertical>
                     <h2>Current Ingredients</h2>
-                    {this.renderMyIngredients()}
+                    <Card.Group centered>
+                        {this.renderMyIngredients()}
+                    </Card.Group>
                 </Segment>
-                <Segment basic padded='very' vertical>
+                {/* <Segment basic padded='very' vertical>
                     <h2>Possible Drinks</h2>
                     {this.renderCocktails()}
 
-                </Segment>
+                </Segment> */}
                 </Container>
             );
         }

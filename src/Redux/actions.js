@@ -69,29 +69,3 @@ export function deleteIngredient(id) {
         ;
     }
 }
-
-
-// Function checkCanMake(cocktail, userIngApi) {
-//     let cocktailIngredients = cocktail.ingredients	
-//     for ingredient in cocktailIngredients {		
-//         let has_ingredient = false		
-//         for owned_ingredient in userIngApi {
-//             if (ingredient.name == owned_ingredient.name && ingredient.quantity <= owned_ingredient.quantity) {
-//                 has_ingredient = true								
-//             }		
-//         }
-//         if not has_ingredient {
-//             return false	
-//         }	
-                            
-//     }                      
-//     return true
-// }
-
-// function generate_name(ingredient) {
-//     return ingredient.quantity + "oz " + ingredient.name;
-// }
-
-// function checkCanMake(cocktailsApi, userIngApi) {
-//     for 
-//}
