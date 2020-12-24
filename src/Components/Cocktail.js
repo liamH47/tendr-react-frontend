@@ -16,7 +16,7 @@ class Cocktail extends Component {
     render() {
         const {cocktail} = this.props 
         return (
-            <Card>
+            <Card color='violet'>
                 <Image src={cocktail.image_url} />
                 <Card.Content>
                     <Card.Header>{cocktail.name}</Card.Header>
