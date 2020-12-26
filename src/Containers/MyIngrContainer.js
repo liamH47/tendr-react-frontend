@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {Segment, Container, Card} from 'semantic-ui-react'
-import Cocktail from '../Components/Cocktail';
+import UserCocktail from '../Components/UserCocktail';
 import UserIngredient from '../Components/UserIngredient';
 import { connect } from 'react-redux'
 import {getUserIngredients, getCocktails} from '../Redux/actions'
@@ -21,7 +21,7 @@ class MyIngrContainer extends Component {
         
         renderCocktails = () => {
            let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === true)
-           return filtered.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+           return filtered.map(tailObj => <UserCocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
         }
 
         checkCanMake(singleCockt, userIngApi) {

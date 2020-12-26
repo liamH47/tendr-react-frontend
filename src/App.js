@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import MyIngrContainer from './Containers/MyIngrContainer'
 import AllIngContainer from './Containers/AllIngContainer'
 import MyCocktailsCont from './Containers/MyCocktailsCont'
+import AllCocktails from './Containers/AllCocktails'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import { Sticky } from 'semantic-ui-react'
@@ -23,6 +24,7 @@ class App extends React.Component {
           <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
           <Route path='/find_ingredients' render={() => <AllIngContainer />} />
           <Route path='/my_cocktails' render={() => <MyCocktailsCont />} />
+          <Route path='/explore_cocktails' render={() => <AllCocktails />}/>
         </Switch>
 
       </div>
