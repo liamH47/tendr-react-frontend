@@ -11,6 +11,8 @@ class Cocktail extends Component {
         // debugger
     }
 
+    
+    
     // renderInstructions = () => {
     //     this.props.cocktail.instructions.map(step => <List.Item >{step}</List.Item>)
     // }
