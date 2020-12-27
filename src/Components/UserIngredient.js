@@ -55,6 +55,7 @@ class UserIngredient extends Component {
                 <Image src={ingredient.image_url} />
                 <Card.Content>
                     <Card.Header>{ingredient.name}</Card.Header>
+                    <Card.Content>In {this.props.cocktailCount} cocktails</Card.Content>
                     <Card.Content>{ingredient.category}</Card.Content>
                     {/* <Card.Content>Stock: {this.showStock()}</Card.Content> */}
                 </Card.Content>
