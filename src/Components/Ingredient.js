@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Card, Image, Button} from 'semantic-ui-react'
-import { addIngredient } from '../Redux/actions';
+import { addIngredient, } from '../Redux/actions';
 import { connect } from 'react-redux'
 class Ingredient extends Component {
 
@@ -26,9 +26,10 @@ class Ingredient extends Component {
     //     running_low: false
     // }
 
-    // componentDidMount() {
-    //     console.log("in ingredient cdm", this.props.ingredient.quantity)
-    // }
+   componentDidMount() {
+       console.log(this.props)
+   }
+   
     
 
     localAddHandler = (e) => {
@@ -51,6 +52,7 @@ class Ingredient extends Component {
                 <Image src={ingredient.image_url} />
                 <Card.Content>
                     <Card.Header inverted>{ingredient.name}</Card.Header>
+                    <Card.Content>In {this.props.cocktailCount} cocktails</Card.Content>
                     <Card.Content>{ingredient.category}</Card.Content>
                 </Card.Content>
                 <Button 
@@ -63,7 +65,9 @@ class Ingredient extends Component {
     }
 }
 function mapDispatchToProps(dispatch){
-    return {localAddHandler: (userIngObj) => dispatch(addIngredient(userIngObj))}
+    return {
+        localAddHandler: (userIngObj) => dispatch(addIngredient(userIngObj))
+    }
 }
 
 
