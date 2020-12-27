@@ -22,7 +22,7 @@ class AllIngContainer extends Component {
             let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
             let sorted = filtered.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             console.log("in render", this.props.userIngApi);
-            return sorted.map(ingObj => <Ingredient ingredient={ingObj} userId={2} key={ingObj.id} id={ingObj.id} />)
+            return sorted.map(ingObj => <Ingredient cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} userId={2} key={ingObj.id} id={ingObj.id} />)
         } else {
             let sorted2 = this.props.ingredientsApi.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             return sorted2.map(ingObj => <Ingredient cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
