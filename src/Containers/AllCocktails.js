@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Segment, Card } from 'semantic-ui-react'
+import { Segment, Image, Card } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails } from '../Redux/actions'
 import Cocktail from '../Components/Cocktail'
+import CocktailModal from '../Components/CocktailModal'
 
 class AllCocktails extends Component {
 
@@ -13,7 +14,7 @@ class AllCocktails extends Component {
     renderAllCocktails = () => {
         let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === false)
         let sorted = filtered.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
-        return sorted.map(tailObj => <Cocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        return sorted.map(tailObj => <CocktailModal name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
      }
 
      howManyIngs = (cocktailObj) => {
@@ -44,7 +45,7 @@ class AllCocktails extends Component {
         return (
             <Segment basic padded='very' vertical>
                 <h2>All Cocktails</h2>
-                <Card.Group centered>
+                <Card.Group size='medium' centered>
                     {this.renderAllCocktails()}
                 </Card.Group>
             </Segment>
