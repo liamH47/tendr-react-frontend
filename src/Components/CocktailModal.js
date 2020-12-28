@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Header, Image, Modal, List, Card } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, List, Card, Icon } from 'semantic-ui-react'
 
 
 const CocktailModal = (props) => {
@@ -10,20 +10,23 @@ const CocktailModal = (props) => {
   const [open, setOpen] = React.useState(false)
 //   <Image.Header>{props.name}</Image.Header>
 //   {<Button>{props.name}</Button>}
+    // <Card>
+    //     <Image src={props.cocktail.image_url} wrapped ui={false} size='small'/>
+    //     <Card.Content>
+
+    //     <Card.Header>{props.name}</Card.Header>
+    //     </Card.Content>
+    // </Card>
   return (
+    <Card>
+      <Image src={props.image_url} />
+      <Card.Header>{props.name} </Card.Header>
+      <Card.Meta>
       <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={
-        <Card>
-            <Image src={props.cocktail.image_url} wrapped ui={false} size='small'/>
-            <Card.Content>
-
-            <Card.Header>{props.name}</Card.Header>
-            </Card.Content>
-        </Card>
-    }
+      trigger={<Icon floated='right' color='blue' size='large' name='info circle'/>}
       >
       <Modal.Header>{props.name}</Modal.Header>
       <Modal.Content image>
@@ -48,6 +51,9 @@ const CocktailModal = (props) => {
           />
       </Modal.Actions>
     </Modal>
+        
+      </Card.Meta>
+    </Card>
 //   console.log("modal return func", this.props)
 )
 
