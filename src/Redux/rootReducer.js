@@ -4,7 +4,8 @@ const defaultState = {
     running_low: false,
     userIngApi: [],
     cocktailsApi: [],
-    ingredientsApi: []
+    ingredientsApi: [],
+    shoppingListApi: []
 }
 
 function runLowReducer(state = defaultState.running_low, action) {
@@ -31,6 +32,17 @@ function cocktailsReducer(state = defaultState.cocktailsApi, action) {
             return action.payload
         default:
             return state 
+    }
+}
+
+function shoppingReducer(state = defaultState.shoppingListApi, action) {
+    switch (action.type) {
+        case "FETCH_SHOPPING_LIST":
+            return action.payload
+        case "ADD_TO_SHOPPING_LIST":
+            return [...state, action.payload]
+        default:
+            return state
     }
 }
 
@@ -64,7 +76,8 @@ const rootReducer = combineReducers({
     running_low: runLowReducer,
     ingredientsApi: ingredientsReducer,
     userIngApi: userIngredientsReducer,
-    cocktailsApi: cocktailsReducer
+    cocktailsApi: cocktailsReducer,
+    shoppingListApi: shoppingReducer
 })
 
 export default rootReducer

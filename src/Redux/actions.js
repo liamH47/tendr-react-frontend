@@ -3,7 +3,9 @@ import {
     FETCH_INGREDIENTS, 
     DELETE_USER_INGREDIENT, 
     FETCH_USER_INGREDIENTS,
-    FETCH_COCKTAILS
+    FETCH_COCKTAILS,
+    ADD_TO_SHOPPING_LIST,
+    FETCH_SHOPPING_LIST
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -54,6 +56,32 @@ export function addIngredient(userIngObj){
 
     }
 
+}
+
+export function addToShoppingList(ingredient){
+    return function (dispatch) {
+        fetch('http://localhost:3000/api/v1/shopping_list_items', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json"
+          },
+          body: JSON.stringify(ingredient)
+        })
+        .then(r => r.json())
+        .then(obj => {
+            dispatch({ type: ADD_TO_SHOPPING_LIST, payload: obj})
+            console.log("inside post", obj)
+            })
+    }
+}
+
+export function getShoppingList() {
+    return function(dispatch) {
+        fetch('http://localhost:3000/api/v1/shopping_list_items')
+        .then(r => r.json())
+        .then(data => dispatch({type: FETCH_SHOPPING_LIST, payload: data}))
+    }
 }
 
 export function deleteIngredient(id) {
