@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Card, Image, Button, Modal} from 'semantic-ui-react'
-import { addIngredient } from '../Redux/actions';
+import { addIngredient, addToShoppingList } from '../Redux/actions';
 import { connect } from 'react-redux'
 
 
@@ -29,6 +29,15 @@ class Ingredient extends Component {
         })
     }
 
+    localListHandler = (e) => {
+        e.preventDefault()
+        this.props.localListHandler({
+            ingredient_id: this.props.ingredient.id,
+            user_id: 1
+        })
+
+    }
+
     render() {
         const {ingredient} = this.props
         return (
@@ -44,13 +53,19 @@ class Ingredient extends Component {
                     content='Add to My Ingredients'
                     onClick={this.localAddHandler}
                 />
+                <Button 
+                    attached='bottom'
+                    content='Add to Shopping List'
+                    onClick={this.localListHandler}
+                />
             </Card>
         );
     }
 }
 function mapDispatchToProps(dispatch){
     return {
-        localAddHandler: (userIngObj) => dispatch(addIngredient(userIngObj))
+        localAddHandler: (userIngObj) => dispatch(addIngredient(userIngObj)),
+        localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient))
     }
 }
 
