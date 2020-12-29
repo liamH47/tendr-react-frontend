@@ -41,6 +41,14 @@ function shoppingReducer(state = defaultState.shoppingListApi, action) {
             return action.payload
         case "ADD_TO_SHOPPING_LIST":
             return [...state, action.payload]
+        case "DELETE_LIST_ITEM":
+            console.log("payload", action.payload);
+            let copyState = [...state]
+            const index = copyState.findIndex(obj => obj.id === action.payload)
+            console.log(index, copyState);
+            copyState.splice(index, 1)
+            console.log(copyState);
+            return copyState
         default:
             return state
     }
