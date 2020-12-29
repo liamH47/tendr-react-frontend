@@ -5,7 +5,8 @@ import {
     FETCH_USER_INGREDIENTS,
     FETCH_COCKTAILS,
     ADD_TO_SHOPPING_LIST,
-    FETCH_SHOPPING_LIST
+    FETCH_SHOPPING_LIST,
+    DELETE_LIST_ITEM
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -81,6 +82,19 @@ export function getShoppingList() {
         fetch('http://localhost:3000/api/v1/shopping_list_items')
         .then(r => r.json())
         .then(data => dispatch({type: FETCH_SHOPPING_LIST, payload: data}))
+    }
+}
+
+export function deleteListItem(id) {
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/shopping_list_items/${id}`, {
+            method: 'DELETE'
+        })
+        .then(data => {
+            dispatch({type: DELETE_LIST_ITEM, payload: id})
+            console.log("inside fetch", data);
+        })
+        ;
     }
 }
 
