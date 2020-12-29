@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Segment, Image, Card } from 'semantic-ui-react'
+import { Segment, Image, Card, Item } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails } from '../Redux/actions'
 import Cocktail from '../Components/Cocktail'
-import CocktailModal from '../Components/CocktailModal'
+import CocktailItem from '../Components/CocktailItem'
 
 class AllCocktails extends Component {
 
@@ -14,7 +14,7 @@ class AllCocktails extends Component {
     renderAllCocktails = () => {
         let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === false)
         let sorted = filtered.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
-        return sorted.map(tailObj => <CocktailModal name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        return sorted.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
      }
 
      howManyIngs = (cocktailObj) => {
@@ -30,8 +30,6 @@ class AllCocktails extends Component {
          let cocktail = singleCockt.cocktail_ingredients
          return cocktail.every(function(ing) {
           return userIngApi.some(function(ing2) {
-            console.log(ing.name, ing2.name)
-            console.log(ing.quantity, ing2.quantity)
              return (ing.name == ing2.name) && (ing.quantity <= ing2.quantity) 
            })
          })
@@ -45,9 +43,9 @@ class AllCocktails extends Component {
         return (
             <Segment basic padded='very' vertical>
                 <h2>All Cocktails</h2>
-                <Card.Group size='medium' centered>
+                <Item.Group divided>
                     {this.renderAllCocktails()}
-                </Card.Group>
+                </Item.Group>
             </Segment>
         );
     }
