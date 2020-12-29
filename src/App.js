@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import MyIngrContainer from './Containers/MyIngrContainer'
 import AllIngContainer from './Containers/AllIngContainer'
 import MyCocktailsCont from './Containers/MyCocktailsCont'
+import ShoppingListCont from './Containers/ShoppingListCont'
 import AllCocktails from './Containers/AllCocktails'
 import { Route, Switch } from 'react-router-dom'
 import Navbar from './Components/Navbar'
@@ -16,15 +17,16 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Sticky>
+        {/* <Sticky> */}
           <Header />
-          <Navbar />
-        </Sticky>
+          {/* <Navbar /> */}
+        {/* </Sticky> */}
         <Switch>
           <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
           <Route path='/find_ingredients' render={() => <AllIngContainer />} />
           <Route path='/my_cocktails' render={() => <MyCocktailsCont />} />
           <Route path='/explore_cocktails' render={() => <AllCocktails />}/>
+          <Route path='/shopping_list' render={() => <ShoppingListCont />}/>
         </Switch>
 
       </div>
