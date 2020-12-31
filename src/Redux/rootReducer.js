@@ -1,11 +1,23 @@
 import {combineReducers} from 'redux'
 
 const defaultState = {
+    currentUser: null,
     running_low: false,
     userIngApi: [],
     cocktailsApi: [],
     ingredientsApi: [],
     shoppingListApi: []
+}
+
+function userReducer(state = defaultState.currentUser, action) {
+    switch(action.type) {
+        case "CREATE_USER":
+            return action.payload
+        case "LOGIN_USER":
+            return action.payload
+        default:
+            return state
+    }
 }
 
 function runLowReducer(state = defaultState.running_low, action) {
@@ -81,6 +93,7 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
 }
 
 const rootReducer = combineReducers({
+    currentUser: userReducer,
     running_low: runLowReducer,
     ingredientsApi: ingredientsReducer,
     userIngApi: userIngredientsReducer,

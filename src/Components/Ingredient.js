@@ -6,21 +6,15 @@ import { connect } from 'react-redux'
 
 class Ingredient extends Component {
 
-    state = {
-        open: false
-    }
-
-
-    componentDidMount() {
-        this.setState({ open: false })
-    }
+    // state = {
+    //     open: false
+    // }
     
-
     localAddHandler = (e) => {
         e.preventDefault()
         this.props.localAddHandler({
             ingredient_id: this.props.ingredient.id,
-            user_id: 1,
+            user_id: this.props.currentUser.user.id,
             name: this.props.ingredient.name,
             category: this.props.ingredient.category,
             image_url: this.props.ingredient.image_url,
@@ -33,7 +27,7 @@ class Ingredient extends Component {
         e.preventDefault()
         this.props.localListHandler({
             ingredient_id: this.props.ingredient.id,
-            user_id: 1
+            user_id: this.props.currentUser.user.id
         })
 
     }
@@ -58,6 +52,11 @@ class Ingredient extends Component {
                     content='Add to Shopping List'
                     onClick={this.localListHandler}
                 />
+                {/* <Button 
+                    attached='bottom'
+                    content='plswork'
+                    onClick={this.postTest}
+                /> */}
             </Card>
         );
     }
@@ -69,5 +68,13 @@ function mapDispatchToProps(dispatch){
     }
 }
 
+function mapStateToProps(state){
+    return {
+        currentUser: state.currentUser,
+        userIngApi: state.userIngApi,
+        cocktailsApi: state.cocktailsApi
+    }
+}
 
-export default connect(null, mapDispatchToProps)(Ingredient)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Ingredient)

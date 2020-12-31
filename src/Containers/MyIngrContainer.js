@@ -46,6 +46,7 @@ function mdp(dispatch){
 }
 function msp(state){
     return {
+        currentUser: state.currentUser,
         userIngApi: state.userIngApi,
         cocktailsApi: state.cocktailsApi
     }

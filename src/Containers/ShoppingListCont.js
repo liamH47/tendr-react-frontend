@@ -36,6 +36,7 @@ function mdp(dispatch){
 }
 function msp(state){
     return {
+        currentUser: state.currentUser,
         shoppingListApi: state.shoppingListApi
     }
 }
