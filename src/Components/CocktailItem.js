@@ -31,12 +31,16 @@ class CocktailItem extends Component {
         return cocktIngs.map((ingredient, index) => {
             const { name, unit, quantity } = ingredient
             return(
-                <Table.Row>
-                    <Table.Cell>{quantity}</Table.Cell>
-                    <Table.Cell>{unit}</Table.Cell>
-                    <Table.Cell>{name}</Table.Cell>
-                    <Table.Cell>{this.ingredientCheck(name)}</Table.Cell>
-                </Table.Row>
+                <List.Item>
+
+                    {quantity} {unit}   {name}
+                </List.Item>
+                // <Table.Row>
+                //     <Table.Cell>{quantity}</Table.Cell>
+                //     <Table.Cell>{unit}</Table.Cell>
+                //     <Table.Cell>{name}</Table.Cell>
+                //     <Table.Cell>{this.ingredientCheck(name)}</Table.Cell>
+                // </Table.Row>
             )
         })
     }
@@ -53,9 +57,12 @@ class CocktailItem extends Component {
                     <List ordered verticalAlign='bottom'>
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
-                    <Table>
+                    <List verticalAlign='bottom'>
                         {this.renderIngTable()}
-                    </Table>
+
+                    </List>
+                    {/* <Table>
+                    </Table> */}
                 </Item.Content>
             </Item>
         );
