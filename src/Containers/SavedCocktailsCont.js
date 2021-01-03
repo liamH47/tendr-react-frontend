@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getSavedCocktails } from '../Redux/actions'
-import CocktailItem from '../Components/CocktailItem'
+import SavedCocktailItem from '../Components/SavedCocktailItem'
 import { Segment, Item } from 'semantic-ui-react'
 
 class SavedCocktailsCont extends Component {
@@ -14,7 +14,7 @@ class SavedCocktailsCont extends Component {
     renderCocktails = () => {
         let id = this.props.currentUser.user.id
         let filtered = this.props.savedCocktails.filter(cocktail => cocktail.user_id === id)
-        return filtered.map(tailObj => <CocktailItem key={tailObj.id} id={tailObj.id} cocktail={tailObj.cocktail} />)
+        return filtered.map(tailObj => <SavedCocktailItem key={tailObj.id} id={tailObj.id} cocktail={tailObj.cocktail} />)
     }
     
 

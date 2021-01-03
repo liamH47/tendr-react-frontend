@@ -10,7 +10,8 @@ import {
     CREATE_USER,
     LOGIN_USER,
     SAVE_COCKTAIL,
-    FETCH_SAVED_COCKTAILS
+    FETCH_SAVED_COCKTAILS,
+    ADD_NOTE_TO_SAVED_COCKTAIL
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -230,5 +231,24 @@ export function getSavedCocktails() {
         })
         .then(r => r.json())
         .then(data => dispatch({type: FETCH_SAVED_COCKTAILS, payload: data}))
+    }
+}
+
+export function addNote(note, id) {
+    const token = localStorage.getItem('token')
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/saved_cocktails/${id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify ({ note })
+        })
+        .then(r => r.json())
+        .then(data => dispatch({type: ADD_NOTE_TO_SAVED_COCKTAIL, payload: data}))
+        
+
     }
 }
