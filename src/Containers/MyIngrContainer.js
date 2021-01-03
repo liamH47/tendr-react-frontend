@@ -10,11 +10,12 @@ class MyIngrContainer extends Component {
       componentDidMount() {
         this.props.fetchUserIngredients()
         this.props.fetchCocktails()
-        console.log(this.props.currentUser)
+        // debugger
       }
         
         renderMyIngredients = () => {
-            let sorted = this.props.userIngApi.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
+            let filtered = this.props.userIngApi.filter(ingredient => ingredient.user_id === this.props.currentUser.user.id)
+            let sorted = filtered.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             return sorted.map(ingObj => <UserIngredient cocktailCount={this.cocktailCount(ingObj)} key={ingObj.id} ingredient={ingObj} id={ingObj.id} category={ingObj.category} name={ingObj.name} image_url={ingObj.image_url} />)
         }
 
