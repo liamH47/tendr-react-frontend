@@ -14,7 +14,7 @@ class SavedCocktailsCont extends Component {
     renderCocktails = () => {
         let id = this.props.currentUser.user.id
         let filtered = this.props.savedCocktails.filter(cocktail => cocktail.user_id === id)
-        return filtered.map(tailObj => <SavedCocktailItem key={tailObj.id} id={tailObj.id} cocktail={tailObj.cocktail} />)
+        return filtered.map(tailObj => <SavedCocktailItem key={tailObj.id} id={tailObj.id} savedCocktail={tailObj} cocktail={tailObj.cocktail} />)
     }
     
 

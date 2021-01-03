@@ -11,7 +11,8 @@ import {
     LOGIN_USER,
     SAVE_COCKTAIL,
     FETCH_SAVED_COCKTAILS,
-    ADD_NOTE_TO_SAVED_COCKTAIL
+    ADD_NOTE_TO_SAVED_COCKTAIL,
+    LOGGED_IN_USER
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -234,21 +235,49 @@ export function getSavedCocktails() {
     }
 }
 
-export function addNote(note, id) {
+export function addNote(updateObj) {
     const token = localStorage.getItem('token')
     return function(dispatch) {
-        fetch(`http://localhost:3000/api/v1/saved_cocktails/${id}`, {
+        fetch(`http://localhost:3000/api/v1/saved_cocktails/${updateObj.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
                 "Accepts": "application/json",
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify ({ note })
+            body: JSON.stringify ({ notes: updateObj.notes })
         })
         .then(r => r.json())
-        .then(data => dispatch({type: ADD_NOTE_TO_SAVED_COCKTAIL, payload: data}))
+        .then(data => dispatch({
+            type: ADD_NOTE_TO_SAVED_COCKTAIL, 
+            payload: {
+                id: data.id,
+                user_id: data.user_id,
+                cocktail_id: data.cocktail_id,
+                notes: data.notes
+            }
+        })
+        )
         
 
+    }
+}
+//savedObj will be the existing saved cocktail
+export function loggedIn() {
+    const token = localStorage.getItem('token')
+    return function(dispatch) {
+        fetch("http://localhost:3000/api/v1/profile", {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`}
+          })
+          .then(r=>r.json())
+          .then(data => {
+            if(data.user){
+              dispatch({type: LOGGED_IN_USER, payload: data.user})
+            }
+          })    
     }
 }

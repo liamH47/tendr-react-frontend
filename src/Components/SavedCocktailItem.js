@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Icon, Input, Item, Label, List, Form} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote } from '../Redux/actions'
+import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote, getSavedCocktails } from '../Redux/actions'
 
 class SavedCocktailItem extends Component {
 
     state = {
-        note: ""
+        notes: ""
     }
 
     changeHandler = (e) => {
@@ -14,13 +14,19 @@ class SavedCocktailItem extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchSavedCocktails()
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
         console.log("in savedcocktail cdm", this.props)
         // debugger
+        // debugger
     }
     //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
 
+
+    //find the saved cocktail object
+    //update the notes array so that it includes the note held in state
+    //pass this new version with updated notes to the add note function, which will patch the previous version with the new one
 
     localSaveHandler = (e) => {
         e.preventDefault()
@@ -29,11 +35,12 @@ class SavedCocktailItem extends Component {
 
     localNoteHandler = (e) => {
         e.preventDefault()
-        this.props.addNewNote(this.state.note, this.props.id)
-    }
+        let savedCocktail = this.props.savedCocktail
+        let notesArr = savedCocktail.notes 
+        let newNotes = [...notesArr, this.state.notes]
+        savedCocktail.notes = newNotes
+        this.props.addNewNote(savedCocktail)
 
-    clickHandler = () => {
-        console.log("click")
     }
     
     ingredientCheck = (name) => {
@@ -43,7 +50,7 @@ class SavedCocktailItem extends Component {
         }else{
             return <Label>
                         <Icon color='red' size='big' name='exclamation circle' />
-                        <Button onClick={this.clickHandler} size='small'>Add To Shopping List</Button>
+                        <Button  size='small'>Add To Shopping List</Button>
                    </Label>
         }
     }
@@ -75,7 +82,7 @@ class SavedCocktailItem extends Component {
                 <Item.Content>
                     <Item.Header>{cocktail.name}</Item.Header>
                     <Item.Meta>{cocktail.category}</Item.Meta>
-                    <Item.Description>{`You are missing ${this.howManyIngs(this.props.cocktail)} ingredients`}</Item.Description>
+                    <Item.Description>{`You are missing ${this.howManyIngs(cocktail)} ingredients`}</Item.Description>
                     <List ordered floated='right'>
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
@@ -85,8 +92,8 @@ class SavedCocktailItem extends Component {
                     </List>
                     <Form onSubmit={this.localNoteHandler}>
                         <Form.Field>
-                            <label>Note</label>
-                            <input placeholder='your notes' />
+                            <label>Notes</label>
+                            <input type='text' name='notes' value={this.state.notes} onChange={this.changeHandler} placeholder='your notes' />
                         </Form.Field>
                         <Button type='submit'>Add Note</Button>
                     </Form>
@@ -101,7 +108,8 @@ function mdp(dispatch){
         fetchCocktails: () => dispatch(getCocktails()),
         fetchUserIngs: () => dispatch(getUserIngredients()),
         localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
-        addNewNote: (note, id) => dispatch(addNote(note, id))
+        fetchSavedCocktails: () => dispatch(getSavedCocktails()),
+        addNewNote: (updateObj) => dispatch(addNote(updateObj))
     }
 }
 
@@ -109,7 +117,8 @@ function msp(state){
     return {
         currentUser: state.currentUser,
         userIngApi: state.userIngApi,
-        cocktailsApi: state.cocktailsApi
+        cocktailsApi: state.cocktailsApi,
+        savedCocktails: state.savedCocktails
     }
 }
 

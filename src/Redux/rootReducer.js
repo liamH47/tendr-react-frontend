@@ -16,6 +16,8 @@ function userReducer(state = defaultState.currentUser, action) {
             return action.payload
         case "LOGIN_USER":
             return action.payload
+        case "LOGGED_IN_USER":
+            return action.payload
         default:
             return state
     }
@@ -94,10 +96,11 @@ function savedCocktailsReducer(state= defaultState.savedCocktails, action) {
         case "FETCH_SAVED_COCKTAILS":
             return action.payload
         case "ADD_NOTE_TO_SAVED_COCKTAIL":
-            let copyState = [...state]
-            let index = copyState.findIndex(cocktail => cocktail.id === action.payload.id)
-            let notes = index.notes
-            return [...notes, action.payload.note]
+            // let copyState = [...state]
+            // let index = copyState.findIndex(savedObj => savedObj.id === action.payload.id)
+            // copyState[index] = action.payload
+            // return copyState
+            return action.payload
         default:
             return state
     }
