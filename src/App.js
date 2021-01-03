@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './Components/Header'
 import MyIngrContainer from './Containers/MyIngrContainer'
+import SavedCocktailsCont from './Containers/SavedCocktailsCont'
 import AllIngContainer from './Containers/AllIngContainer'
 import MyCocktailsCont from './Containers/MyCocktailsCont'
 import ShoppingListCont from './Containers/ShoppingListCont'
@@ -43,6 +44,7 @@ class App extends React.Component {
           <Route path='/explore_cocktails' render={() => <AllCocktails />}/>
           <Route path='/shopping_list' render={() => <ShoppingListCont />}/>
           <Route path='/welcome' render={() => <LogInContainer />} />
+          <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
         </Switch>
 
       </div>

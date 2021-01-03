@@ -14,6 +14,7 @@ const Header = () => {
                     <Menu.Item as={NavLink} to="/explore_cocktails">Explore Cocktails</Menu.Item>
                     <Menu.Item as={NavLink} to="/shopping_list">Shopping List</Menu.Item>
                     <Menu.Item as={NavLink} to="/welcome">Welcome</Menu.Item>
+                    <Menu.Item as={NavLink} to="/saved_cocktails">Saved Cocktails</Menu.Item>
                 </Menu>
             </Segment>
         </Sticky>

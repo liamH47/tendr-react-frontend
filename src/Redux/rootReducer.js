@@ -91,6 +91,8 @@ function savedCocktailsReducer(state= defaultState.savedCocktails, action) {
     switch (action.type) {
         case "SAVE_COCKTAIL":
             return [...state, action.payload]
+        case "FETCH_SAVED_COCKTAILS":
+            return action.payload
         default:
             return state
     }

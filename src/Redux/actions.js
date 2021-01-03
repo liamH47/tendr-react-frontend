@@ -9,7 +9,8 @@ import {
     DELETE_LIST_ITEM, 
     CREATE_USER,
     LOGIN_USER,
-    SAVE_COCKTAIL
+    SAVE_COCKTAIL,
+    FETCH_SAVED_COCKTAILS
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -216,4 +217,18 @@ export function saveCocktail(cocktailId, userId){
 
     }
 
+}
+
+export function getSavedCocktails() {
+    const token = localStorage.getItem('token')
+    return function(dispatch) {
+        fetch('http://localhost:3000/api/v1/saved_cocktails', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(r => r.json())
+        .then(data => dispatch({type: FETCH_SAVED_COCKTAILS, payload: data}))
+    }
 }
