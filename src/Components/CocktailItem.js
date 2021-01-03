@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, List, Table } from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, List} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getCocktails, getUserIngredients } from '../Redux/actions'
+import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail } from '../Redux/actions'
 
 class CocktailItem extends Component {
 
     componentDidMount() {
+        this.props.fetchIngredients()
         this.props.fetchUserIngs()
-        console.log("in cocktail cdm", this.props.cocktail.cocktail_ingredients)
+        console.log("in cocktail cdm", this.props.currentUser.user.id)
+        // debugger
+    }
+
+
+    localSaveHandler = (e) => {
+        e.preventDefault()
+        this.props.localSaveHandler( this.props.cocktail.id, this.props.currentUser.user.id)
+    }
+
+    // localListHandler = (e) => {
+    //     e.preventDefault()
+    //     this.props.localListHandler({
+    //         ingredient_id: this.props.ingredient.id,
+    //         user_id: this.props.currentUser.user.id
+    //     })
+
+    // }
+    //need to find the id of the ingredient whose name matches 
+
+    clickHandler = () => {
+        console.log("click")
     }
     
     ingredientCheck = (name) => {
@@ -15,7 +37,10 @@ class CocktailItem extends Component {
         if(ingNames.includes(name)) {
             return <Icon color='green' size='big' name='check circle' />
         }else{
-            return <Icon color='red' size='big' name='exclamation circle' />
+            return <Label>
+                        <Icon color='red' size='big' name='exclamation circle' />
+                        <Button onClick={this.clickHandler} size='small'>Add To Shopping List</Button>
+                   </Label>
         }
     }
 
@@ -33,14 +58,8 @@ class CocktailItem extends Component {
             return(
                 <List.Item>
 
-                    {quantity} {unit}   {name}
+                    {quantity} {unit} {name} {this.ingredientCheck(name)}
                 </List.Item>
-                // <Table.Row>
-                //     <Table.Cell>{quantity}</Table.Cell>
-                //     <Table.Cell>{unit}</Table.Cell>
-                //     <Table.Cell>{name}</Table.Cell>
-                //     <Table.Cell>{this.ingredientCheck(name)}</Table.Cell>
-                // </Table.Row>
             )
         })
     }
@@ -57,12 +76,11 @@ class CocktailItem extends Component {
                     <List ordered verticalAlign='bottom'>
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
-                    <List verticalAlign='bottom'>
+                    <List verticalAlign='left'>
                         {this.renderIngTable()}
 
                     </List>
-                    {/* <Table>
-                    </Table> */}
+                    <Button onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
                 </Item.Content>
             </Item>
         );
@@ -70,13 +88,17 @@ class CocktailItem extends Component {
 }
 function mdp(dispatch){
     return{
+        fetchIngredients: () => dispatch(getIngredients()),
         fetchCocktails: () => dispatch(getCocktails()),
-        fetchUserIngs: () => dispatch(getUserIngredients())
+        fetchUserIngs: () => dispatch(getUserIngredients()),
+        localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
+        localSaveHandler: (cocktailId, userId) => dispatch(saveCocktail(cocktailId, userId)) 
     }
 }
 
 function msp(state){
     return {
+        currentUser: state.currentUser,
         userIngApi: state.userIngApi,
         cocktailsApi: state.cocktailsApi
     }

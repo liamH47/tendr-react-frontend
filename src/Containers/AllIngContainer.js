@@ -12,7 +12,8 @@ class AllIngContainer extends Component {
             this.props.fetchUserIngredients()
             this.props.fetchCocktails()
             console.log("in allIng cdm, currentuser state:", this.props.currentUser)
-    }
+            console.log("in allIng cdm, ingredientsApi state:", this.props.ingredientsApi)    
+        }
 
     renderIngredients = () => {
         if(this.props.userIngApi.length > 0) {
@@ -21,7 +22,7 @@ class AllIngContainer extends Component {
             let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
             let sorted = filtered.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             console.log("in render", this.props.userIngApi);
-            return sorted.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} userId={2} key={ingObj.id} id={ingObj.id} />)
+            return sorted.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
         } else {
             let sorted2 = this.props.ingredientsApi.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             return sorted2.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)

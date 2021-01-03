@@ -6,7 +6,8 @@ const defaultState = {
     userIngApi: [],
     cocktailsApi: [],
     ingredientsApi: [],
-    shoppingListApi: []
+    shoppingListApi: [],
+    savedCocktails: []
 }
 
 function userReducer(state = defaultState.currentUser, action) {
@@ -81,14 +82,17 @@ function userIngredientsReducer(state = defaultState.userIngApi, action) {
             copyState.splice(index, 1)
             console.log(copyState);
             return copyState
-            //.slice deletes the correct one but needs a refresh 
-            //.splice deletes them one by one but does not always delete the right one
-            // let ingredients = state.filter(obj => obj.id !== action.payload.id)
-            // return { ...state, ingredients } request goes through but all ingredients are removed until refresh
-
-
         default:
             return state 
+    }
+}
+
+function savedCocktailsReducer(state= defaultState.savedCocktails, action) {
+    switch (action.type) {
+        case "SAVE_COCKTAIL":
+            return [...state, action.payload]
+        default:
+            return state
     }
 }
 
@@ -98,7 +102,8 @@ const rootReducer = combineReducers({
     ingredientsApi: ingredientsReducer,
     userIngApi: userIngredientsReducer,
     cocktailsApi: cocktailsReducer,
-    shoppingListApi: shoppingReducer
+    shoppingListApi: shoppingReducer,
+    savedCocktails: savedCocktailsReducer
 })
 
 export default rootReducer

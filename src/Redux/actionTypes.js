@@ -17,3 +17,5 @@ export const DELETE_LIST_ITEM = "DELETE_LIST_ITEM"
 export const CREATE_USER = "CREATE_USER"
 
 export const LOGIN_USER = "LOGIN_USER"
+
+export const SAVE_COCKTAIL = "SAVE_COCKTAIL"
