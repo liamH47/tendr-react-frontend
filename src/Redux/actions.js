@@ -12,7 +12,8 @@ import {
     SAVE_COCKTAIL,
     FETCH_SAVED_COCKTAILS,
     ADD_NOTE_TO_SAVED_COCKTAIL,
-    LOGGED_IN_USER
+    LOGGED_IN_USER,
+    DELETE_SAVED_COCKTAIL
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -219,6 +220,23 @@ export function saveCocktail(cocktailId, userId){
 
     }
 
+}
+
+export function deleteSavedCocktail(id) {
+    const token = localStorage.getItem('token')
+    return function(dispatch) {
+        fetch(`http://localhost:3000/api/v1/saved_cocktails/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(data => {
+            dispatch({type: DELETE_SAVED_COCKTAIL, payload: id})
+            console.log("inside fetch", data);
+        })
+        ;
+    }
 }
 
 export function getSavedCocktails() {

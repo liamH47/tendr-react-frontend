@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Icon, Input, Item, Label, List, Form} from 'semantic-ui-react'
+import { Button, Icon, Item, Label, List, Form} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote, getSavedCocktails } from '../Redux/actions'
+import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote, getSavedCocktails, deleteSavedCocktail } from '../Redux/actions'
 
 class SavedCocktailItem extends Component {
 
@@ -31,6 +31,10 @@ class SavedCocktailItem extends Component {
     localSaveHandler = (e) => {
         e.preventDefault()
         this.props.localSaveHandler( this.props.cocktail.id, this.props.currentUser.user.id)
+    }
+
+    localDeleteHandler = () => {
+        this.props.localDeleteHandler(this.props.id)
     }
 
     localNoteHandler = (e) => {
@@ -97,6 +101,7 @@ class SavedCocktailItem extends Component {
                         </Form.Field>
                         <Button type='submit'>Add Note</Button>
                     </Form>
+                    <Button onClick={this.localDeleteHandler}>Remove From Saved Cocktails</Button>
                 </Item.Content>
             </Item>
         );
@@ -109,7 +114,8 @@ function mdp(dispatch){
         fetchUserIngs: () => dispatch(getUserIngredients()),
         localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
         fetchSavedCocktails: () => dispatch(getSavedCocktails()),
-        addNewNote: (updateObj) => dispatch(addNote(updateObj))
+        addNewNote: (updateObj) => dispatch(addNote(updateObj)),
+        localDeleteHandler: (id) => dispatch(deleteSavedCocktail(id))
     }
 }
 
