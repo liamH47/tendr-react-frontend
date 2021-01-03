@@ -101,6 +101,15 @@ function savedCocktailsReducer(state= defaultState.savedCocktails, action) {
             // copyState[index] = action.payload
             // return copyState
             return action.payload
+        case "DELETE_SAVED_COCKTAIL":
+            console.log("payload", action.payload);
+            let copyState = [...state]
+            const index = copyState.findIndex(obj => obj.id === action.payload)
+            console.log(index, copyState);
+            copyState.splice(index, 1)
+            console.log(copyState);
+            return copyState
+
         default:
             return state
     }
