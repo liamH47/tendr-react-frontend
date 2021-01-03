@@ -9,6 +9,11 @@ class Ingredient extends Component {
     // state = {
     //     open: false
     // }
+
+    componentDidMount() {
+        console.log("currentuser in ingredient render", this.props.currentUser)
+    }
+    
     
     localAddHandler = (e) => {
         e.preventDefault()

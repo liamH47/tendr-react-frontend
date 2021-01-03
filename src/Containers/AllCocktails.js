@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Image, Card, Item } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getUserIngredients, getCocktails } from '../Redux/actions'
+import { getUserIngredients, getCocktails} from '../Redux/actions'
 import Cocktail from '../Components/Cocktail'
 import CocktailItem from '../Components/CocktailItem'
 
@@ -9,6 +9,8 @@ class AllCocktails extends Component {
 
     componentDidMount() {
         this.props.fetchCocktails()
+        // console.log(this.props.currentUser)
+        // debugger
     }
 
     renderAllCocktails = () => {

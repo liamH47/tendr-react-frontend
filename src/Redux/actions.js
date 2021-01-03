@@ -8,7 +8,8 @@ import {
     FETCH_SHOPPING_LIST,
     DELETE_LIST_ITEM, 
     CREATE_USER,
-    LOGIN_USER
+    LOGIN_USER,
+    SAVE_COCKTAIL
 } from './actionTypes'
 
 export function toggleRunningLow() {
@@ -189,4 +190,30 @@ export function logInUser(loginInfo) {
             dispatch({type: LOGIN_USER, payload: data})
         })
 }
+}
+
+export function saveCocktail(cocktailId, userId){
+    const token = localStorage.getItem('token')
+    return function (dispatch) {
+        fetch('http://localhost:3000/api/v1/saved_cocktails', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "Accepts": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              user_id: userId,
+              cocktail_id: cocktailId,
+              notes: []
+          })
+        })
+        .then(r => r.json())
+        .then(obj => {
+            dispatch({ type: SAVE_COCKTAIL, payload: obj})
+            console.log("inside post", obj)
+            })
+
+    }
+
 }

@@ -10,6 +10,7 @@ class MyIngrContainer extends Component {
       componentDidMount() {
         this.props.fetchUserIngredients()
         this.props.fetchCocktails()
+        console.log(this.props.currentUser)
       }
         
         renderMyIngredients = () => {
