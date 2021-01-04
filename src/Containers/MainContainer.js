@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 class MainContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchCurrentUser()
+        // this.props.fetchCurrentUser()
     }
     
 
