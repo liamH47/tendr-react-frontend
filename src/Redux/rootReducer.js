@@ -96,11 +96,14 @@ function savedCocktailsReducer(state= defaultState.savedCocktails, action) {
         case "FETCH_SAVED_COCKTAILS":
             return action.payload
         case "ADD_NOTE_TO_SAVED_COCKTAIL":
-            // let copyState = [...state]
-            // let index = copyState.findIndex(savedObj => savedObj.id === action.payload.id)
-            // copyState[index] = action.payload
-            // return copyState
-            return action.payload
+            let copyState2 = [...state]
+            let index2 = copyState2.findIndex(savedObj => savedObj.id === action.payload.id)
+            copyState2[index2] = action.payload
+            console.log("index2:", index2)
+            console.log("copystate:", copyState2)
+            console.log("payload:", action.payload)
+            return copyState2
+            // return action.payload
         case "DELETE_SAVED_COCKTAIL":
             console.log("payload", action.payload);
             let copyState = [...state]

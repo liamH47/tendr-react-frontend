@@ -17,9 +17,8 @@ class SavedCocktailItem extends Component {
         this.props.fetchSavedCocktails()
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
-        console.log("in savedcocktail cdm", this.props)
-        // debugger
-        // debugger
+        debugger
+
     }
     //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
 
@@ -30,7 +29,8 @@ class SavedCocktailItem extends Component {
 
     localSaveHandler = (e) => {
         e.preventDefault()
-        this.props.localSaveHandler( this.props.cocktail.id, this.props.currentUser.user.id)
+        this.props.localSaveHandler( this.props.savedCocktail.cocktail_id, this.props.currentUser.user.id)
+        console.log("hello?")
     }
 
     localDeleteHandler = () => {
@@ -39,11 +39,19 @@ class SavedCocktailItem extends Component {
 
     localNoteHandler = (e) => {
         e.preventDefault()
-        let savedCocktail = this.props.savedCocktail
-        let notesArr = savedCocktail.notes 
-        let newNotes = [...notesArr, this.state.notes]
-        savedCocktail.notes = newNotes
-        this.props.addNewNote(savedCocktail)
+        let currentNotes = this.props.savedCocktail.notes
+        let newNotes = [...currentNotes, this.state.notes]
+
+
+        const updateObj = {
+            id: this.props.id,
+            user_id: this.props.savedCocktail.user_id,
+            cocktail_id: this.props.savedCocktail.cocktail_id,
+            notes: newNotes,
+            user: this.props.savedCocktail.user,
+            cocktail: this.props.savedCocktail.cocktail
+        }
+        this.props.addNewNote(updateObj)
 
     }
     
@@ -54,7 +62,7 @@ class SavedCocktailItem extends Component {
         }else{
             return <Label>
                         <Icon color='red' size='big' name='exclamation circle' />
-                        <Button  size='small'>Add To Shopping List</Button>
+                        <Button onClick={this.localSaveHandler} size='small'>Add To Shopping List</Button>
                    </Label>
         }
     }
@@ -79,16 +87,16 @@ class SavedCocktailItem extends Component {
     }
 
     render() {
-        const { cocktail } = this.props
+        // const { cocktail } = this.props
         return (
             <Item padded='very'>
-                <Item.Image rounded size='medium' floated='left' src={cocktail.image_url} />
+                <Item.Image rounded size='medium' floated='left' src={this.props.savedCocktail.cocktail.image_url} />
                 <Item.Content>
-                    <Item.Header>{cocktail.name}</Item.Header>
-                    <Item.Meta>{cocktail.category}</Item.Meta>
-                    <Item.Description>{`You are missing ${this.howManyIngs(cocktail)} ingredients`}</Item.Description>
+                    <Item.Header>{this.props.savedCocktail.cocktail.name}</Item.Header>
+                    <Item.Meta>{this.props.savedCocktail.cocktail.category}</Item.Meta>
+                    <Item.Description>{`You are missing ${this.howManyIngs(this.props.savedCocktail.cocktail)} ingredients`}</Item.Description>
                     <List ordered floated='right'>
-                        {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
+                        {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
                     <List floated='right'>
                         {this.renderIngTable()}
@@ -115,7 +123,8 @@ function mdp(dispatch){
         localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
         fetchSavedCocktails: () => dispatch(getSavedCocktails()),
         addNewNote: (updateObj) => dispatch(addNote(updateObj)),
-        localDeleteHandler: (id) => dispatch(deleteSavedCocktail(id))
+        localDeleteHandler: (id) => dispatch(deleteSavedCocktail(id)),
+        localSaveHandler: (ingredient) => dispatch(addToShoppingList(ingredient))
     }
 }
 
