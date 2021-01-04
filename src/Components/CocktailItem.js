@@ -8,7 +8,7 @@ class CocktailItem extends Component {
     componentDidMount() {
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
-
+        console.log(this.props.currentUser)
         // debugger
     }
 
