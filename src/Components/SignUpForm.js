@@ -34,7 +34,7 @@ class SignUpForm extends Component {
                     </Form.Field>
                     <Form.Field required>
                         <label>Password</label>
-                        <input type="text" name="password" placeholder='Desired Password' value={this.state.password} onChange={this.changeHandler}/>
+                        <input type="password" name="password" placeholder='Desired Password' value={this.state.password} onChange={this.changeHandler}/>
                     </Form.Field>
                     <Button type='submit'>Submit</Button>
                 </Form>

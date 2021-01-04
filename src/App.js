@@ -17,26 +17,7 @@ import MainContainer from './Containers/MainContainer'
 
 class App extends React.Component {
 
-//   state = {
-//     user: null
-//   }
 
-//   signUp = (userObj) => {
-//     fetch('http://localhost:3000/api/v1/users', {
-//     method: 'POST',
-//     headers: {
-//     'Content-Type': 'application/json',
-//         Accept: 'application/json'
-//     },
-//     body: JSON.stringify({ user: userObj })
-//     })
-//     .then(r => r.json())
-//     .then(data => this.setState({ user: data.user}))
-// }
-
-  // componentDidMount() {
-  //   this.props.fetchCurrentUser()
-  // }
   
   
   render() {

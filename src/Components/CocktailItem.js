@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label, List} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail } from '../Redux/actions'
+import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail, getShoppingList } from '../Redux/actions'
 
 class CocktailItem extends Component {
 
     componentDidMount() {
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
+        this.props.fetchShoppingList()
         console.log(this.props.currentUser)
         // debugger
     }
@@ -34,8 +35,11 @@ class CocktailItem extends Component {
     
     ingredientCheck = (name) => {
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
+        let shoppingNames = this.props.shoppingListApi.map(ing => ing.ingredient.name)
         if(ingNames.includes(name)) {
             return <Icon color='green' size='big' name='check circle' />
+        }else if(shoppingNames.includes(name)){
+            return <Icon color='blue' size='big' name='shopping cart'/>
         }else{
             return <Label>
                         <Icon color='red' size='big' name='exclamation circle' />
@@ -92,7 +96,8 @@ function mdp(dispatch){
         fetchCocktails: () => dispatch(getCocktails()),
         fetchUserIngs: () => dispatch(getUserIngredients()),
         localListHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
-        localSaveHandler: (cocktailId, userId) => dispatch(saveCocktail(cocktailId, userId)) 
+        localSaveHandler: (cocktailId, userId) => dispatch(saveCocktail(cocktailId, userId)),
+        fetchShoppingList: () => dispatch(getShoppingList()) 
     }
 }
 
@@ -100,7 +105,8 @@ function msp(state){
     return {
         currentUser: state.currentUser,
         userIngApi: state.userIngApi,
-        cocktailsApi: state.cocktailsApi
+        cocktailsApi: state.cocktailsApi,
+        shoppingListApi: state.shoppingListApi
     }
 }
 
