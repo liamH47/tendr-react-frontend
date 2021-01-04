@@ -272,7 +272,9 @@ export function addNote(updateObj) {
                 id: data.id,
                 user_id: data.user_id,
                 cocktail_id: data.cocktail_id,
-                notes: data.notes
+                notes: data.notes,
+                user: data.user,
+                cocktail: data.cocktail
             }
         })
         )
