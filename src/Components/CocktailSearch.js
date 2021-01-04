@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'semantic-ui-react'
 
-const IngredientSearch = ({ searchValue, changeHandler }) => {
+const CocktailSearch = ({ searchValue, changeHandler }) => {
     return(
         <div>
             <Form>
@@ -12,4 +12,4 @@ const IngredientSearch = ({ searchValue, changeHandler }) => {
 
 }
 
-export default IngredientSearch
+export default CocktailSearch

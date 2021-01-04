@@ -18,14 +18,14 @@ class CocktailItem extends Component {
         this.props.localSaveHandler( this.props.cocktail.id, this.props.currentUser.user.id)
     }
 
-    // localListHandler = (e) => {
-    //     e.preventDefault()
-    //     this.props.localListHandler({
-    //         ingredient_id: this.props.ingredient.id,
-    //         user_id: this.props.currentUser.user.id
-    //     })
+    localListHandler = (e) => {
+        e.preventDefault()
+        this.props.localListHandler({
+            ingredient_id: this.props.ingredient.id,
+            user_id: this.props.currentUser.user.id
+        })
 
-    // }
+    }
     //need to find the id of the ingredient whose name matches 
 
     clickHandler = () => {

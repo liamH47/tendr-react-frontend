@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Image, Button, Modal} from 'semantic-ui-react'
+import {Card, Image, Button} from 'semantic-ui-react'
 import { addIngredient, addToShoppingList } from '../Redux/actions';
 import { connect } from 'react-redux'
 
