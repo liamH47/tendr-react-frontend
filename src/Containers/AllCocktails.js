@@ -4,8 +4,18 @@ import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 import Cocktail from '../Components/Cocktail'
 import CocktailItem from '../Components/CocktailItem'
+import CocktailSearch from '../Components/CocktailSearch'
 
 class AllCocktails extends Component {
+
+    state =  {
+        searchValue: "",
+        // categories: []
+    }
+
+    changeHandler = (e) => {
+        this.setState({ searchValue: e.target.value })
+    }
 
     componentDidMount() {
         this.props.fetchCocktails()
@@ -16,8 +26,11 @@ class AllCocktails extends Component {
     renderAllCocktails = () => {
         let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === false)
         let sorted = filtered.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
-        return sorted.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        let searchArray = sorted.filter(cocktail => cocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()))
+        return searchArray.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
      }
+
+    //  let searchArray2 = sorted2.filter(ingredient => ingredient.name.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
 
      howManyIngs = (cocktailObj) => {
         let cocktail = cocktailObj.cocktail_ingredients
@@ -45,6 +58,7 @@ class AllCocktails extends Component {
         return (
             <Segment basic padded='very' vertical>
                 <h2>All Cocktails</h2>
+                <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
                 <Item.Group divided>
                     {this.renderAllCocktails()}
                 </Item.Group>

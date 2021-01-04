@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Card, Input } from 'semantic-ui-react'
+import { Segment, Card, Dropdown } from 'semantic-ui-react'
 import Ingredient from '../Components/Ingredient'
 import { connect } from 'react-redux'
 import {getIngredients, getUserIngredients, getCocktails} from '../Redux/actions'
@@ -9,7 +9,8 @@ import IngredientSearch from '../Components/IngredientSearch'
 class AllIngContainer extends Component {
 
     state =  {
-        searchValue: ""
+        searchValue: "",
+        // categories: []
     }
 
     changeHandler = (e) => {
@@ -20,9 +21,12 @@ class AllIngContainer extends Component {
             this.props.fetchIngredients()
             this.props.fetchUserIngredients()
             this.props.fetchCocktails()
-            console.log("in allIng cdm, currentuser state:", this.props.currentUser)
-            console.log("in allIng cdm, ingredientsApi state:", this.props.ingredientsApi)    
-        }
+
+    }
+
+    // setCategories = () => {
+    //     let 
+    // }
 
     renderIngredients = () => {
         if(this.props.userIngApi.length > 0) {

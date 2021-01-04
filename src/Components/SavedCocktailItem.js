@@ -17,8 +17,6 @@ class SavedCocktailItem extends Component {
         this.props.fetchSavedCocktails()
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
-        debugger
-
     }
     //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
 
