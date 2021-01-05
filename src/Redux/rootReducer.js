@@ -18,8 +18,8 @@ function userReducer(state = defaultState.currentUser, action) {
             return action.payload
         case "LOGGED_IN_USER":
             return action.payload
-        case "LOGOUT":
-            return null
+        // case "LOGOUT":
+        //     return null
         default:
             return state
     }

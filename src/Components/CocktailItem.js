@@ -41,10 +41,10 @@ class CocktailItem extends Component {
         }else if(shoppingNames.includes(name)){
             return <Icon color='blue' size='big' name='shopping cart'/>
         }else{
-            return <Label>
-                        <Icon color='red' size='big' name='exclamation circle' />
-                        <Button onClick={this.clickHandler} size='small'>Add To Shopping List</Button>
-                   </Label>
+            return <Icon color='red' size='big' name='exclamation circle' />
+            // <Label>
+            //             <Button onClick={this.clickHandler} size='small'>Add To Shopping List</Button>
+            //        </Label>
         }
     }
 

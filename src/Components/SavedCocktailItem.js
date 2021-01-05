@@ -17,6 +17,7 @@ class SavedCocktailItem extends Component {
         this.props.fetchSavedCocktails()
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
+        // debugger
     }
     //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
 
@@ -84,6 +85,11 @@ class SavedCocktailItem extends Component {
         })
     }
 
+    // renderNotes = () => {
+    //     let notesArr = this.props.savedCocktail.notes
+    //     notesArr.map((note) => <List.Item>{note}</List.Item>)
+    // }
+
     render() {
         // const { cocktail } = this.props
         return (
@@ -94,11 +100,17 @@ class SavedCocktailItem extends Component {
                     <Item.Meta>{this.props.savedCocktail.cocktail.category}</Item.Meta>
                     <Item.Description>{`You are missing ${this.howManyIngs(this.props.savedCocktail.cocktail)} ingredients`}</Item.Description>
                     <List ordered floated='right'>
+                        <List.Header>Instructions</List.Header>
                         {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
-                    <List floated='right'>
+                    <List floated='left'>
+                        <List.Header>Ingredients</List.Header>
                         {this.renderIngTable()}
 
+                    </List>
+                    <List ordered floated='right'>
+                        <List.Header>My Notes</List.Header>
+                        {this.props.savedCocktail.notes.map(element => <List.Item>{element}</List.Item>)}
                     </List>
                     <Form onSubmit={this.localNoteHandler}>
                         <Form.Field>
