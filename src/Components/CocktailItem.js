@@ -52,7 +52,12 @@ class CocktailItem extends Component {
         let cocktail = cocktailObj.cocktail_ingredients
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
         let hasThis = cocktail.filter((ing) => ingNames.includes(ing.name))
-        return cocktail.length - hasThis.length
+        let missingIngCount = cocktail.length - hasThis.length
+        if(missingIngCount >= 1){
+            return `You are missing ${missingIngCount} ingredients `
+        } else {
+            return 'You have all the Ingredients!'
+        }
     }
 
     renderIngTable = () => {
@@ -76,7 +81,7 @@ class CocktailItem extends Component {
                 <Item.Content>
                     <Item.Header>{cocktail.name}</Item.Header>
                     <Item.Meta>{cocktail.category}</Item.Meta>
-                    <Item.Description>{`You are missing ${this.howManyIngs(this.props.cocktail)} ingredients`}</Item.Description>
+                    <Item.Description>{this.howManyIngs(this.props.cocktail)}</Item.Description>
                     <List ordered verticalAlign='bottom'>
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
