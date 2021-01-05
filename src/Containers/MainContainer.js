@@ -14,9 +14,33 @@ import { connect } from 'react-redux'
 
 class MainContainer extends Component {
 
-    componentDidMount() {
-        // this.props.fetchCurrentUser()
+    state = {
+        user: null
     }
+
+    // componentDidMount() {
+    //     const token = localStorage.getItem('token')
+    //     if (token) {
+    //         fetch('http://localhost:3000/api/v1/profile', {
+    //             method: 'GET',
+    //             headers: { Authorization: `Bearer ${token}`},
+    //         })
+    //         .then(r => r.json())
+    //         .then(data => this.setState({ user: data.user }))
+    //     } else {
+    //         return "Please log in"
+    //     }
+    // }
+    componentDidMount() {
+        const token = localStorage.getItem('token')
+        if(token) {
+            return this.props.fetchCurrentUser()
+        } else {
+            return "please log in"
+        }
+        console.log(this.props.currentUser)
+    }
+    
     
 
     render() {
