@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   background-attachment: fixed;
   background-color: #FFF8E7;
 }
@@ -13,6 +13,11 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.main {
+  background-attachment: fixed;
+  background-color: #FFF8E7;
 }
 
 .App-header {

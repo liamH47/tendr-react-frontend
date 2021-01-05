@@ -74,7 +74,12 @@ class SavedCocktailItem extends Component {
         let cocktail = cocktailObj.cocktail_ingredients
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
         let hasThis = cocktail.filter((ing) => ingNames.includes(ing.name))
-        return cocktail.length - hasThis.length
+        let missingIngCount = cocktail.length - hasThis.length
+        if(missingIngCount >= 1){
+            return `You are missing ${missingIngCount} ingredients `
+        } else {
+            return 'You have all the Ingredients!'
+        }
     }
 
     renderIngTable = () => {
@@ -84,7 +89,7 @@ class SavedCocktailItem extends Component {
             return(
                 <List.Item floated='left'>
                     <List.Content floated='left'>
-                        {this.ingredientCheck(name)}  {quantity} {unit} {name} 
+                        {this.ingredientCheck(name)} {quantity} {unit} {name} 
                     </List.Content>
                 </List.Item>
             )
@@ -100,20 +105,22 @@ class SavedCocktailItem extends Component {
         // const { cocktail } = this.props
         return (
             <Item padded='very'>
-                <Item.Image rounded size='medium' floated='left' src={this.props.savedCocktail.cocktail.image_url} />
-                <Item.Content>
-                    <Item.Header>{this.props.savedCocktail.cocktail.name}</Item.Header>
+                <Item.Image rounded size='large' floated='left' src={this.props.savedCocktail.cocktail.image_url} />
+                <Item.Content floated='left'>
+                    <Item.Header className='cocktail-item-header' floated='left'>{this.props.savedCocktail.cocktail.name}</Item.Header>
                     <Item.Meta>{this.props.savedCocktail.cocktail.category}</Item.Meta>
-                    <Item.Description>{`You are missing ${this.howManyIngs(this.props.savedCocktail.cocktail)} ingredients`}</Item.Description>
+                    <Item.Description>{this.howManyIngs(this.props.savedCocktail.cocktail)}</Item.Description>
                     <List animated verticalAlign='middle'>
                         {/* <List.Header floated='left'>Ingredients</List.Header> */}
                         {this.renderIngTable()}
                     </List>
-                    <List ordered floated='right'>
-                        <List.Header>Instructions</List.Header>
-                        {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
+                    <List ordered floated='left'>
+                        <List.Header floated='left'>Instructions</List.Header>
+                        {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item floated='left'><List.Content floated='left'>{element}</List.Content></List.Item>)}
                     </List>
-                    <List ordered floated='right'>
+                </Item.Content>
+                <Item.Content floated='right'>
+                    <List verticalAlign='middle' ordered floated='left'>
                         <List.Header>My Notes</List.Header>
                         {this.props.savedCocktail.notes.map(element => <List.Item>{element}</List.Item>)}
                     </List>
@@ -124,7 +131,8 @@ class SavedCocktailItem extends Component {
                         </Form.Field>
                         <Button type='submit'>Add Note</Button>
                     </Form>
-                    <Button onClick={this.localDeleteHandler}>Remove From Saved Cocktails</Button>
+                        
+                    <Button verticalAlign='bottom' onClick={this.localDeleteHandler}>Remove From Saved Cocktails</Button>
                 </Item.Content>
             </Item>
         );

@@ -10,7 +10,7 @@ import './App.css';
 
 import { BrowserRouter } from 'react-router-dom'
 // import Navbar from './Components/Navbar'
-// import { Sticky } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 // import { connect } from 'react-redux'
 // import { loggedIn } from './Redux/actions'
 import MainContainer from './Containers/MainContainer'
@@ -35,7 +35,9 @@ class App extends React.Component {
           <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
         </Switch> */}
           <BrowserRouter>
-            <MainContainer />
+            <Container fluid className='main'>
+              <MainContainer />
+            </Container>
           </BrowserRouter>
       </div>
     );
