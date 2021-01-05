@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Icon, Item, Label, List, Form} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote, getSavedCocktails, deleteSavedCocktail } from '../Redux/actions'
+import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, addNote, getSavedCocktails, deleteSavedCocktail, getShoppingList } from '../Redux/actions'
 
 class SavedCocktailItem extends Component {
 
@@ -17,6 +17,7 @@ class SavedCocktailItem extends Component {
         this.props.fetchSavedCocktails()
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
+        this.props.fetchShoppingList()
         // debugger
     }
     //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
@@ -56,13 +57,16 @@ class SavedCocktailItem extends Component {
     
     ingredientCheck = (name) => {
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
+        let shoppingNames = this.props.shoppingListApi.map(ing => ing.ingredient.name)
         if(ingNames.includes(name)) {
             return <Icon color='green' size='big' name='check circle' />
+        }else if(shoppingNames.includes(name)){
+            return <Icon color='blue' size='big' name='shopping cart'/>
         }else{
-            return <Label>
-                        <Icon color='red' size='big' name='exclamation circle' />
-                        <Button onClick={this.localSaveHandler} size='small'>Add To Shopping List</Button>
-                   </Label>
+            return <Icon color='red' size='big' name='exclamation circle' />
+            //  <Label>
+            //             <Button onClick={this.localSaveHandler} size='small'>Add To Shopping List</Button>
+            //        </Label>
         }
     }
 
@@ -78,8 +82,10 @@ class SavedCocktailItem extends Component {
         return cocktIngs.map((ingredient, index) => {
             const { name, unit, quantity } = ingredient
             return(
-                <List.Item>
-                    {quantity} {unit} {name} {this.ingredientCheck(name)}
+                <List.Item floated='left'>
+                    <List.Content floated='left'>
+                        {this.ingredientCheck(name)}  {quantity} {unit} {name} 
+                    </List.Content>
                 </List.Item>
             )
         })
@@ -99,14 +105,13 @@ class SavedCocktailItem extends Component {
                     <Item.Header>{this.props.savedCocktail.cocktail.name}</Item.Header>
                     <Item.Meta>{this.props.savedCocktail.cocktail.category}</Item.Meta>
                     <Item.Description>{`You are missing ${this.howManyIngs(this.props.savedCocktail.cocktail)} ingredients`}</Item.Description>
+                    <List animated verticalAlign='middle'>
+                        {/* <List.Header floated='left'>Ingredients</List.Header> */}
+                        {this.renderIngTable()}
+                    </List>
                     <List ordered floated='right'>
                         <List.Header>Instructions</List.Header>
                         {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
-                    </List>
-                    <List floated='left'>
-                        <List.Header>Ingredients</List.Header>
-                        {this.renderIngTable()}
-
                     </List>
                     <List ordered floated='right'>
                         <List.Header>My Notes</List.Header>
@@ -134,7 +139,8 @@ function mdp(dispatch){
         fetchSavedCocktails: () => dispatch(getSavedCocktails()),
         addNewNote: (updateObj) => dispatch(addNote(updateObj)),
         localDeleteHandler: (id) => dispatch(deleteSavedCocktail(id)),
-        localSaveHandler: (ingredient) => dispatch(addToShoppingList(ingredient))
+        localSaveHandler: (ingredient) => dispatch(addToShoppingList(ingredient)),
+        fetchShoppingList: () => dispatch(getShoppingList()) 
     }
 }
 
@@ -143,7 +149,8 @@ function msp(state){
         currentUser: state.currentUser,
         userIngApi: state.userIngApi,
         cocktailsApi: state.cocktailsApi,
-        savedCocktails: state.savedCocktails
+        savedCocktails: state.savedCocktails,
+        shoppingListApi: state.shoppingListApi
     }
 }
 
