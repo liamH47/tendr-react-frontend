@@ -7,7 +7,7 @@ import './App.css';
 // import ShoppingListCont from './Containers/ShoppingListCont'
 // import LogInContainer from './Containers/LogInContainer';
 // import AllCocktails from './Containers/AllCocktails'import Header from './Components/Header'
-
+import Header from './Components/Header'
 import { BrowserRouter } from 'react-router-dom'
 // import Navbar from './Components/Navbar'
 import { Container } from 'semantic-ui-react'
@@ -35,9 +35,10 @@ class App extends React.Component {
           <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
         </Switch> */}
           <BrowserRouter>
-            <Container fluid className='main'>
+            <div className='main'>
+              <Header />
               <MainContainer />
-            </Container>
+            </div>
           </BrowserRouter>
       </div>
     );

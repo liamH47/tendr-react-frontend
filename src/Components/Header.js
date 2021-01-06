@@ -1,13 +1,12 @@
 import React from 'react';
-import {Segment, Sticky, Menu} from 'semantic-ui-react'
+import { Sticky, Menu} from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <Sticky>
-            <Segment inverted vertical>
-                <h1>welcome to tendr</h1>
-                <Menu inverted>
+        // <Sticky>
+            <div className='header-grid'>
+                <Menu fluid vertical inverted>
                     <Menu.Item as={NavLink} to="/my_cocktails">My Cocktails</Menu.Item>
                     <Menu.Item as={NavLink} to="/my_ingredients">My Ingredients</Menu.Item>
                     <Menu.Item as={NavLink} to="/find_ingredients">Find Ingredients</Menu.Item>
@@ -16,8 +15,8 @@ const Header = () => {
                     <Menu.Item as={NavLink} to="/welcome">Welcome</Menu.Item>
                     <Menu.Item as={NavLink} to="/saved_cocktails">Saved Cocktails</Menu.Item>
                 </Menu>
-            </Segment>
-        </Sticky>
+            </div>
+        // </Sticky>
     )
 }
 

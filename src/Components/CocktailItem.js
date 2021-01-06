@@ -156,23 +156,6 @@ class CocktailItem extends Component {
                         </Modal>
                     </Card.Content>
                 </Card>
-            // <Item >
-            //     <Item.Image rounded size='medium' floated='left' src={cocktail.image_url} />
-            //     <Item.Content>
-            //         <Item.Header>{cocktail.name}</Item.Header>
-            //         <Item.Meta>{cocktail.category}</Item.Meta>
-            //         <Item.Description>{this.howManyIngs(this.props.cocktail)}</Item.Description>
-            //         <List ordered verticalAlign='bottom'>
-            //             <List.Header content='Recipe' />
-            //             {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
-            //         </List>
-            //         <List verticalAlign='left'>
-            //             {this.renderIngTable()}
-
-            //         </List>
-            //         <Button onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
-            //     </Item.Content>
-            // </Item>
 
         );
     }
