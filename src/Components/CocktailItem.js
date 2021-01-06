@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, List} from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, List, Modal} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail, getShoppingList } from '../Redux/actions'
 import CocktailModal from './CocktailModal'
 class CocktailItem extends Component {
+
+    state = {
+        clicked: false,
+        open: false
+      }
+    
+      toggleHandler = () => {
+        this.setState({
+          clicked: !this.state.clicked,
+        })
+      }
+    
+      toggleModal = () => {
+        this.setState({
+          open: !this.state.open,
+        })
+      }
 
     componentDidMount() {
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
         this.props.fetchShoppingList()
         console.log(this.props.currentUser)
+        this.setState({ clicked: false, open: false})
         // debugger
     }
 
@@ -84,6 +102,7 @@ class CocktailItem extends Component {
                     <Item.Meta>{cocktail.category}</Item.Meta>
                     <Item.Description>{this.howManyIngs(this.props.cocktail)}</Item.Description>
                     <List ordered verticalAlign='bottom'>
+                        <List.Header content='Recipe' />
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
                     </List>
                     <List verticalAlign='left'>
@@ -91,6 +110,39 @@ class CocktailItem extends Component {
 
                     </List>
                     <Button onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
+                    <Modal
+                        onClose={() => this.toggleModal()}
+                        onOpen={() => this.toggleModal()}
+                        open={this.state.open}
+                        trigger={
+                            <Button
+                            content='Learn More'
+                            floated="right"
+                            positive
+                            size="tiny"
+                            onClick={() => {
+                                this.toggleModal();
+                            }}
+                            />
+                        }>
+                        <Modal.Header textAlign='center' >
+                            <h1>{cocktail.name}</h1>
+                            <p>{cocktail.category}</p>
+                        </Modal.Header>
+                        <Modal.Content image>
+                            <Image rounded floated='left' size='medium' src={cocktail.image_url} alt={cocktail.name} wrapped />
+                            <Modal.Description></Modal.Description>
+                            <List animated verticalAlign='middle'>
+                                <List.Header content='Recipe:' />
+                                {this.renderIngTable()}
+                            </List>
+                        </Modal.Content>
+                        
+                        <Modal.Actions>
+                            <Button color='green' onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
+                            <Button color="red" onClick={() => this.toggleModal()}>Exit</Button>
+                        </Modal.Actions>
+                    </Modal>
                 </Item.Content>
             </Item>
 
