@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Segment, Image, Card, Item } from 'semantic-ui-react'
+import { Segment, Image, Card, Container} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
-import Cocktail from '../Components/Cocktail'
 import CocktailItem from '../Components/CocktailItem'
 import CocktailSearch from '../Components/CocktailSearch'
 
 class AllCocktails extends Component {
 
     state =  {
-        searchValue: "",
-        // categories: []
+        searchValue: ""
     }
 
     changeHandler = (e) => {
@@ -30,8 +28,6 @@ class AllCocktails extends Component {
         return searchArray.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
      }
 
-    //  let searchArray2 = sorted2.filter(ingredient => ingredient.name.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
-
      howManyIngs = (cocktailObj) => {
         let cocktail = cocktailObj.cocktail_ingredients
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
@@ -39,8 +35,6 @@ class AllCocktails extends Component {
         return cocktail.length - hasThis.length
     }
     
-
-
      checkCanMake(singleCockt, userIngApi) {
          let cocktail = singleCockt.cocktail_ingredients
          return cocktail.every(function(ing) {
@@ -49,24 +43,24 @@ class AllCocktails extends Component {
            })
          })
      }
-
-    // renderAllCocktails = () => {
-    //     return this.props.cocktailsApi.map(cocktail => <Cocktail cocktail={cocktail} id={cocktail.id} key={cocktail.id} />)
-    // }
     
     render() {
         return (
             <> {this.props.cocktailsApi.length ? 
-                <Segment basic padded='very' vertical>
-                    <h2>All Cocktails</h2>
-                    <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
-                    {/* <Item.Group relaxed divided>
-                        {this.renderAllCocktails()}
-                    </Item.Group> */}
-                    <Card.Group centered >
-                        {this.renderAllCocktails()}
-                        </Card.Group>
-                </Segment>
+                <Container>
+                    <Segment textAlign='center' basic padded='very' vertical>
+                        <h2>All Cocktails</h2>
+                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
+                    </Segment>
+                        {/* <Item.Group relaxed divided>
+                            {this.renderAllCocktails()}
+                        </Item.Group> */}
+                    <Segment>
+                        <Card.Group centered >
+                            {this.renderAllCocktails()}
+                            </Card.Group>
+                    </Segment>
+                </Container>
                  : <h2>loading</h2>
                  }
             </>

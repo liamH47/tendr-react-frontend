@@ -10,6 +10,7 @@ import LogInContainer from './LogInContainer';
 import AllCocktails from './AllCocktails'
 import { loggedIn } from '../Redux/actions'
 import { connect } from 'react-redux'
+import { Container } from 'semantic-ui-react'
 // import AllCocktails from './AllCocktails'
 
 class MainContainer extends Component {
@@ -18,36 +19,10 @@ class MainContainer extends Component {
         user: null
     }
 
-    // componentDidMount() {
-    //     const token = localStorage.getItem('token')
-    //     if (token) {
-    //         fetch('http://localhost:3000/api/v1/profile', {
-    //             method: 'GET',
-    //             headers: { Authorization: `Bearer ${token}`},
-    //         })
-    //         .then(r => r.json())
-    //         .then(data => this.setState({ user: data.user }))
-    //     } else {
-    //         return "Please log in"
-    //     }
-    // }
-    // componentDidMount() {
-    //     const token = localStorage.getItem('token')
-    //     if(token) {
-    //         this.props.fetchCurrentUser()
-    //         this.props.history.push('/explore_cocktails')
-    //     } else {
-    //         this.props.history.push('/welcome')
-    //     }
-    //     console.log(this.props.currentUser)
-    // }
-    
-    
-
     render() {
         return (
-            <div>
-                <Header />
+            <div className='main-content'>
+                {/* <Header /> */}
                 <Switch>
                     <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
                     <Route path='/find_ingredients' render={() => <AllIngContainer />} />
@@ -57,6 +32,7 @@ class MainContainer extends Component {
                     <Route path='/welcome' render={() => <LogInContainer />} />
                     <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
                 </Switch>               
+
             </div>
         );
     }

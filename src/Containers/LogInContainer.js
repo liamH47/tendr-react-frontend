@@ -8,7 +8,7 @@ class LogInContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{padding: '100px'}}>
                 <LogInForm />
                 <SignUpForm />
             </div>
