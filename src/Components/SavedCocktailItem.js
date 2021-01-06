@@ -18,14 +18,8 @@ class SavedCocktailItem extends Component {
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
         this.props.fetchShoppingList()
-        // debugger
+        console.log("saved cocktail render props:", this.props)
     }
-    //patch request that will take an argument of the id and this.state.note id is for url and note is to be patched in
-
-
-    //find the saved cocktail object
-    //update the notes array so that it includes the note held in state
-    //pass this new version with updated notes to the add note function, which will patch the previous version with the new one
 
     localSaveHandler = (e) => {
         e.preventDefault()
@@ -41,8 +35,6 @@ class SavedCocktailItem extends Component {
         e.preventDefault()
         let currentNotes = this.props.savedCocktail.notes
         let newNotes = [...currentNotes, this.state.notes]
-
-
         const updateObj = {
             id: this.props.id,
             user_id: this.props.savedCocktail.user_id,
@@ -52,7 +44,7 @@ class SavedCocktailItem extends Component {
             cocktail: this.props.savedCocktail.cocktail
         }
         this.props.addNewNote(updateObj)
-
+        e.target.reset()
     }
     
     ingredientCheck = (name) => {
@@ -64,9 +56,6 @@ class SavedCocktailItem extends Component {
             return <Icon color='blue' size='big' name='shopping cart'/>
         }else{
             return <Icon color='red' size='big' name='exclamation circle' />
-            //  <Label>
-            //             <Button onClick={this.localSaveHandler} size='small'>Add To Shopping List</Button>
-            //        </Label>
         }
     }
 
@@ -96,33 +85,30 @@ class SavedCocktailItem extends Component {
         })
     }
 
-    // renderNotes = () => {
-    //     let notesArr = this.props.savedCocktail.notes
-    //     notesArr.map((note) => <List.Item>{note}</List.Item>)
-    // }
-
     render() {
-        // const { cocktail } = this.props
+        // const { savedCocktail } = this.props.savedCocktail
         return (
             <Item padded='very'>
                 <Item.Image rounded size='large' floated='left' src={this.props.savedCocktail.cocktail.image_url} />
                 <Item.Content floated='left'>
-                    <Item.Header className='cocktail-item-header' floated='left'>{this.props.savedCocktail.cocktail.name}</Item.Header>
+                    <Item.Header className='cocktail-item-header' floated='left'><h1>{this.props.savedCocktail.cocktail.name}</h1></Item.Header>
                     <Item.Meta>{this.props.savedCocktail.cocktail.category}</Item.Meta>
                     <Item.Description>{this.howManyIngs(this.props.savedCocktail.cocktail)}</Item.Description>
                     <List animated verticalAlign='middle'>
                         {/* <List.Header floated='left'>Ingredients</List.Header> */}
                         {this.renderIngTable()}
                     </List>
+                    <Item.Description>Glass: {this.props.savedCocktail.cocktail.recommended_glass} </Item.Description>
+                    <Item.Description>Ice: {this.props.savedCocktail.cocktail.recommended_ice} </Item.Description>
                     <List ordered floated='left'>
                         <List.Header floated='left'>Instructions</List.Header>
                         {this.props.savedCocktail.cocktail.instructions.map(element => <List.Item floated='left'><List.Content floated='left'>{element}</List.Content></List.Item>)}
                     </List>
                 </Item.Content>
                 <Item.Content floated='right'>
-                    <List verticalAlign='middle' ordered floated='left'>
+                    <List verticalAlign='middle' bulleted floated='right'>
                         <List.Header>My Notes</List.Header>
-                        {this.props.savedCocktail.notes.map(element => <List.Item>{element}</List.Item>)}
+                        {this.props.savedCocktail.notes.map(element => <List.Item floated='left'><List.Content floated='left'>{element}</List.Content></List.Item>)}
                     </List>
                     <Form onSubmit={this.localNoteHandler}>
                         <Form.Field>

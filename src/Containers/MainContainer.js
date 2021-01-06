@@ -31,15 +31,16 @@ class MainContainer extends Component {
     //         return "Please log in"
     //     }
     // }
-    componentDidMount() {
-        const token = localStorage.getItem('token')
-        if(token) {
-            return this.props.fetchCurrentUser()
-        } else {
-            return "please log in"
-        }
-        console.log(this.props.currentUser)
-    }
+    // componentDidMount() {
+    //     const token = localStorage.getItem('token')
+    //     if(token) {
+    //         this.props.fetchCurrentUser()
+    //         this.props.history.push('/explore_cocktails')
+    //     } else {
+    //         this.props.history.push('/welcome')
+    //     }
+    //     console.log(this.props.currentUser)
+    // }
     
     
 

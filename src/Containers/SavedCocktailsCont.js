@@ -21,12 +21,16 @@ class SavedCocktailsCont extends Component {
 
     render() {
         return(
+        <>
+        {this.props.savedCocktails.length ? 
         <Segment basic padded='very' vertical>
             <h2>Saved Cocktails</h2>
-            <Item.Group divided>
+            <Item.Group relaxed divided>
                 {this.renderCocktails()}
             </Item.Group>
         </Segment>
+        : <h2>loading</h2>}
+        </>
         )
     }
 }

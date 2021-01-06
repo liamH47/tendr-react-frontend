@@ -18,24 +18,23 @@ const CocktailModal = (props) => {
     //     </Card.Content>
     // </Card>
   return (
-    <Card>
-      <Image src={props.image_url} />
-      <Card.Header>{props.name} </Card.Header>
-      <Card.Meta>
       <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Icon floated='right' color='blue' size='large' name='info circle'/>}
+      trigger={<Button>Show Modal</Button>}
       >
-      <Modal.Header>{props.name}</Modal.Header>
+      <Modal.Header textAlign='center'>
+        <h1>{props.name}</h1>
+        <p>{props.category}</p>
+      </Modal.Header>
       <Modal.Content image>
         <Image size='medium' src={props.image_url} alt={props.name} wrapped />
         <Modal.Description>
-          <Header>Default Profile Image</Header>
-          <List ordered verticalAlign='bottom'>
+          <Header textAlign='center' content={props.name} />
+          {/* <List ordered verticalAlign='bottom'>
                         {props.cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
-          </List>
+          </List> */}
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
@@ -52,8 +51,7 @@ const CocktailModal = (props) => {
       </Modal.Actions>
     </Modal>
         
-      </Card.Meta>
-    </Card>
+
 //   console.log("modal return func", this.props)
 )
 

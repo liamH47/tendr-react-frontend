@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Segment} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logInUser } from '../Redux/actions'
+import { withRouter } from 'react-router-dom'
 
 class LogInForm extends Component {
 
@@ -17,7 +18,9 @@ class LogInForm extends Component {
     loginHandler = (e) => {
         e.preventDefault()
         this.props.loginHandler(this.state)
+        this.props.history.push('/find_ingredients')
         console.log("current user after pressing log in:",this.props.currentUser)
+
     }
 
     render() {
@@ -51,4 +54,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogInForm));
