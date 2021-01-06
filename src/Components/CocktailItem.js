@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Image, Item, Label, List, Modal} from 'semantic-ui-react'
+import { Button, Icon, Image, Item, Label, List, Modal, Segment, Grid, Divider} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail, getShoppingList } from '../Redux/actions'
 import CocktailModal from './CocktailModal'
@@ -111,6 +111,8 @@ class CocktailItem extends Component {
                     </List>
                     <Button onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
                     <Modal
+                        size='large'
+                        closeIcon
                         onClose={() => this.toggleModal()}
                         onOpen={() => this.toggleModal()}
                         open={this.state.open}
@@ -126,22 +128,49 @@ class CocktailItem extends Component {
                             />
                         }>
                         <Modal.Header textAlign='center' >
-                            <h1>{cocktail.name}</h1>
-                            <p>{cocktail.category}</p>
+                            <h3>{cocktail.name}</h3>
                         </Modal.Header>
-                        <Modal.Content image>
-                            <Image rounded floated='left' size='medium' src={cocktail.image_url} alt={cocktail.name} wrapped />
-                            <Modal.Description></Modal.Description>
-                            <List animated verticalAlign='middle'>
+                        {/* <Modal.Content image> */}
+                            <Segment>
+                                <Grid columns={3} stackable>
+                                    <Grid.Column width={6} >
+                                        <Image src={cocktail.image_url} alt={cocktail.name} size='large' rounded floated='left' />
+                                    </Grid.Column>
+                                    <Grid.Column width={3}>
+                                        <List relaxed  verticalAlign='left'>
+                                            <List.Item><strong>Category:</strong> {cocktail.category}</List.Item>
+                                            <List.Item><strong>Glass:</strong> {cocktail.recommended_glass}</List.Item>
+                                            <List.Item><strong>Ice:</strong> {cocktail.recommended_ice}</List.Item>
+                                            <List.Item><strong>Garnish:</strong> {cocktail.garnish}</List.Item>
+                                        </List>
+                                        <List relaxed bulleted floated='left' verticalAlign='bottom'>
+                                            <List.Header><strong>Recipe</strong></List.Header>
+                                            {cocktail.instructions.map(element => <List.Item floated='left'><List.Content floated='left'>{element}</List.Content></List.Item>)}
+                                        </List>
+                                        {/* <Label>Category: {cocktail.category}</Label>
+                                        <Label>{this.howManyIngs(this.props.cocktail)}</Label> */}
+                                    </Grid.Column>
+                                    <Grid.Column width={3}>
+
+                                        <List animated relaxed='very' verticalAlign='left'>
+                                            <List.Header textAlign='center'>{this.howManyIngs(this.props.cocktail)}</List.Header>
+                                            {this.renderIngTable()}
+                                        </List>
+                                        <Button attached='bottom' color='green' onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
+                                    </Grid.Column>
+                                </Grid>
+                            </Segment>
+                            {/* <Image rounded floated='left' size='medium' src={cocktail.image_url} alt={cocktail.name} wrapped />
+                            <Modal.Description floated='left'>Category: {cocktail.category} </Modal.Description>
+                            <List floated='left' animated verticalAlign='middle'>
                                 <List.Header content='Recipe:' />
                                 {this.renderIngTable()}
-                            </List>
-                        </Modal.Content>
+                            </List> */}
+                        {/* </Modal.Content> */}
                         
-                        <Modal.Actions>
-                            <Button color='green' onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
+                        {/* <Modal.Actions>
                             <Button color="red" onClick={() => this.toggleModal()}>Exit</Button>
-                        </Modal.Actions>
+                        </Modal.Actions> */}
                     </Modal>
                 </Item.Content>
             </Item>
