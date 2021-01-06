@@ -56,13 +56,20 @@ class AllCocktails extends Component {
     
     render() {
         return (
-            <Segment basic padded='very' vertical>
-                <h2>All Cocktails</h2>
-                <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
-                <Item.Group divided>
-                    {this.renderAllCocktails()}
-                </Item.Group>
-            </Segment>
+            <> {this.props.cocktailsApi.length ? 
+                <Segment basic padded='very' vertical>
+                    <h2>All Cocktails</h2>
+                    <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
+                    <Item.Group relaxed divided>
+                        {this.renderAllCocktails()}
+                    </Item.Group>
+                    {/* <Card.Group centered >
+                        {this.renderAllCocktails()}
+                    </Card.Group> */}
+                </Segment>
+                 : <h2>loading</h2>
+                 }
+            </>
         );
     }
 }

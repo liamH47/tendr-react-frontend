@@ -28,6 +28,7 @@ class MyIngrContainer extends Component {
         
         render() {
             return (
+                <> {this.props.userIngApi.length ?                 
                 <Container>
                     <Segment basic padded='very' vertical>
                         <h2>Current Ingredients</h2>
@@ -36,6 +37,9 @@ class MyIngrContainer extends Component {
                         </Card.Group>
                     </Segment>
                 </Container>
+                    : <h2>loading</h2>
+                    }
+                </>
             );
         }
 }
@@ -55,3 +59,4 @@ function msp(state){
 }
 
 export default connect(msp, mdp)(MyIngrContainer)
+

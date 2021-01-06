@@ -18,13 +18,17 @@ class ShoppingListCont extends Component {
 
     render() {
         return (
-            <Container>
-                <Segment  basic padded='very' vertical>
-                    <Card.Group centered>
-                        {this.renderShoppingList()}
-                    </Card.Group>
-                </Segment>
-            </Container>
+            <> {this.props.shoppingListApi.length ? 
+                <Container>
+                    <Segment  basic padded='very' vertical>
+                        <Card.Group centered>
+                            {this.renderShoppingList()}
+                        </Card.Group>
+                    </Segment>
+                </Container>
+             : <h2>loading</h2>
+                }
+            </>
         );
     }
 }

@@ -31,12 +31,16 @@ class MyCocktailsCont extends Component {
 
     render() {
         return (
-            <Segment basic padded='very' vertical>
-                <h2>Possible Drinks</h2>
-                <Card.Group centered>
-                    {this.renderCocktails()}
-                </Card.Group>
-            </Segment>
+            <> {this.props.cocktailsApi.length ? 
+                <Segment basic padded='very' vertical>
+                    <h2>Possible Drinks</h2>
+                    <Card.Group centered>
+                        {this.renderCocktails()}
+                    </Card.Group>
+                </Segment>
+            : <h2>loading</h2>
+                }
+            </>
         );
     }
 }

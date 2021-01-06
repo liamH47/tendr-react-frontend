@@ -13,14 +13,30 @@ class Cocktail extends Component {
 
     
     
-    // renderInstructions = () => {
-    //     this.props.cocktail.instructions.map(step => <List.Item >{step}</List.Item>)
-    // }
     howManyIngs = (cocktailObj) => {
         let cocktail = cocktailObj.cocktail_ingredients
         let ingNames = this.props.userIngApi.map(ingredient => ingredient.name)
         let hasThis = cocktail.filter((ing) => ingNames.includes(ing.name))
-        return cocktail.length - hasThis.length
+        let missingIngCount = cocktail.length - hasThis.length
+        if(missingIngCount >= 1){
+            return `You are missing ${missingIngCount} ingredients `
+        } else {
+            return 'You have all the Ingredients!'
+        }
+    }
+
+    renderIngTable = () => {
+        let cocktIngs = this.props.cocktail.cocktail_ingredients
+        return cocktIngs.map((ingredient, index) => {
+            const { name, unit, quantity } = ingredient
+            return(
+                <List.Item floated='left'>
+                    <List.Content floated='left'>
+                        {this.ingredientCheck(name)} {quantity} {unit} {name} 
+                    </List.Content>
+                </List.Item>
+            )
+        })
     }
     
 
@@ -28,13 +44,18 @@ class Cocktail extends Component {
         const {cocktail} = this.props 
         return (
             <Card color='violet'>
-                <Image src={cocktail.image_url} />
+                <Image floated='left' size='medium' src={cocktail.image_url} />
                 <Card.Content>
                     <Card.Header>{cocktail.name}</Card.Header>
-                    <List ordered verticalAlign='bottom'>
+                    <Card.Meta>{this.howManyIngs(this.props.cocktail)} ingredients</Card.Meta>
+                    {/* <List ordered verticalAlign='bottom'>
                         {cocktail.instructions.map(element => <List.Item>{element}</List.Item>)}
-                    </List>
-                    <Card.Meta>You are missing {this.howManyIngs(this.props.cocktail)} ingredients</Card.Meta>
+                    </List> */}
+                    <Card.Description>
+                        <List animated verticalAlign='middle'>
+                            {this.renderIngTable()}
+                        </List>
+                    </Card.Description>
                 </Card.Content>
 
             </Card>

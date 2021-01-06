@@ -41,8 +41,8 @@ class Ingredient extends Component {
         const {ingredient} = this.props
         return (
             <Card>
-                <Image src={ingredient.image_url} />
-                <Card.Content>
+                <Image bordered src={ingredient.image_url} />
+                <Card.Content textAlign='center'>
                     <Card.Header inverted>{ingredient.name}</Card.Header>
                     <Card.Content>In {this.props.cocktailCount} cocktails</Card.Content>
                     <Card.Content>{ingredient.category}</Card.Content>

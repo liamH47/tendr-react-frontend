@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Icon, Image, Item, Label, List} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getCocktails, getUserIngredients, addToShoppingList, getIngredients, saveCocktail, getShoppingList } from '../Redux/actions'
-
+import CocktailModal from './CocktailModal'
 class CocktailItem extends Component {
 
     componentDidMount() {
@@ -65,9 +65,10 @@ class CocktailItem extends Component {
         return cocktIngs.map((ingredient, index) => {
             const { name, unit, quantity } = ingredient
             return(
-                <List.Item>
-
-                    {quantity} {unit} {name} {this.ingredientCheck(name)}
+                <List.Item floated='left'>
+                    <List.Content floated='left'>
+                        {this.ingredientCheck(name)} {quantity} {unit} {name} 
+                    </List.Content>
                 </List.Item>
             )
         })
@@ -92,6 +93,7 @@ class CocktailItem extends Component {
                     <Button onClick={this.localSaveHandler}>Add to Saved Cocktails</Button>
                 </Item.Content>
             </Item>
+
         );
     }
 }
