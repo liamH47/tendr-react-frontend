@@ -98,7 +98,7 @@ class CocktailItem extends Component {
                         {cocktail.name}
                     </Card.Content>
                     <Card.Content extra>
-                        <Button positive color='green' onClick={this.localSaveHandler} content='Save Cocktail' />
+                        <Button color='blue' onClick={this.localSaveHandler} content='Save Cocktail' />
                         <Modal
                             size='large'
                             closeIcon

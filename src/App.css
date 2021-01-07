@@ -92,4 +92,8 @@ html{
   justify-content: center;
 }
 
+.search-form {
+  padding: 20px;
+  width: 40%;
+}
 /* align: flex-end; for images */

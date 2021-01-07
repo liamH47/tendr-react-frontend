@@ -55,7 +55,7 @@ class Ingredient extends Component {
                             content='My Ingredients'
                             onClick={this.localAddHandler}
                             />
-                        <Button.Or />
+
                         <Button 
                             color='blue'
                             content='Shopping List'
