@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 import CocktailItem from '../Components/CocktailItem'
 import CocktailSearch from '../Components/CocktailSearch'
+import Loading from '../Components/Loading'
 
 class AllCocktails extends Component {
 
@@ -69,8 +70,7 @@ class AllCocktails extends Component {
                             {this.renderAllCocktails()}
                         </Card.Group>
                 </Container>
-                 : <h2>loading</h2>
-                 }
+                 : <Loading />}
             </>
         );
     }
