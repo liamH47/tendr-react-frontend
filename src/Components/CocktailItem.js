@@ -93,13 +93,13 @@ class CocktailItem extends Component {
         const { cocktail } = this.props
         return (
                 <Card>
-                    <Image bordered src ={cocktail.image_url} />
+                    <Image className='cocktail-image' bordered src ={cocktail.image_url} />
                     <Card.Content>
                         {cocktail.name}
                     </Card.Content>
                     <Card.Content extra>
                         <Button color='blue' onClick={this.localSaveHandler} content='Save Cocktail' />
-                        <Modal
+                        <Modal className='cocktail-modal'
                             size='large'
                             closeIcon
                             onClose={() => this.toggleModal()}

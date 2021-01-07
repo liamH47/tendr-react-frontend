@@ -35,9 +35,9 @@ html{
   height: 100%;
   display: inline-grid; 
   grid-template-areas: 
-  "header header header"
-  "leftnav contentarea contentarea"
-  "leftnav contentarea contentarea";
+  "header header header header"
+  "leftnav contentarea contentarea contentarea" 
+  "leftnav contentarea contentarea contentarea";
 }
 
 .header-grid {
@@ -96,5 +96,14 @@ html{
 .search-form {
   padding: 20px;
   width: 40%;
+}
+
+.cocktail-image {
+  align: flex-end;
+}
+
+.cocktail-modal {
+  background-color: #FFF8E7;
+  background: transparent;
 }
 /* align: flex-end; for images */
