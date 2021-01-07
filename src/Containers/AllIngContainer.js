@@ -56,7 +56,8 @@ class AllIngContainer extends Component {
         return (
             <> {this.props.ingredientsApi.length ? 
             <Container>
-                <Segment content='Search' basic padded='very' vertical>
+                <Segment textAlign='center' basic padded='very' vertical>
+                    <h2>Ingredients</h2>
                     <IngredientSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
                 </Segment>
                 <Segment basic padded='very' vertical>

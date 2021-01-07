@@ -14,6 +14,7 @@ import { Container } from 'semantic-ui-react'
 // import { connect } from 'react-redux'
 // import { loggedIn } from './Redux/actions'
 import MainContainer from './Containers/MainContainer'
+import TendrHeader from './Components/TendrHeader';
 
 class App extends React.Component {
 
@@ -36,6 +37,7 @@ class App extends React.Component {
         </Switch> */}
           <BrowserRouter>
             <div className='main'>
+              <TendrHeader />
               <Header />
               <MainContainer />
             </div>

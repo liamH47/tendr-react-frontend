@@ -98,7 +98,7 @@ class CocktailItem extends Component {
                         {cocktail.name}
                     </Card.Content>
                     <Card.Content extra>
-                        <Button basic color='green' onClick={this.localSaveHandler}>Save Cocktail</Button>
+                        <Button positive color='green' onClick={this.localSaveHandler} content='Save Cocktail' />
                         <Modal
                             size='large'
                             closeIcon
@@ -108,9 +108,7 @@ class CocktailItem extends Component {
                             trigger={
                                 <Button
                                 content='Learn More'
-                                floated="right"
                                 positive
-                                size="tiny"
                                 onClick={() => {
                                     this.toggleModal();
                                 }}

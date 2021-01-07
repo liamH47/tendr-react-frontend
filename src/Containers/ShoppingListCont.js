@@ -3,6 +3,7 @@ import { getShoppingList } from '../Redux/actions'
 import { connect } from 'react-redux'
 import {Segment, Container, Card} from 'semantic-ui-react'
 import ShoppingListItem from '../Components/ShoppingListItem'
+import Loading from '../Components/Loading'
 
 
 class ShoppingListCont extends Component {
@@ -26,7 +27,7 @@ class ShoppingListCont extends Component {
                         </Card.Group>
                     </Segment>
                 </Container>
-             : <h2>loading</h2>
+             : <Loading />
                 }
             </>
         );
