@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import {getIngredients, getUserIngredients, getCocktails} from '../Redux/actions'
 import { Redirect } from 'react-router-dom'
 import IngredientSearch from '../Components/IngredientSearch'
+import Loading from '../Components/Loading'
 
 class AllIngContainer extends Component {
 
@@ -64,7 +65,7 @@ class AllIngContainer extends Component {
                         {this.renderIngredients()}
                     </Card.Group>
                 </Segment>
-            </Container> : <h2>loading</h2>}
+            </Container> : <Loading />}
             </>
         );
     }
