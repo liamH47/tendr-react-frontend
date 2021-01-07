@@ -47,16 +47,22 @@ class Ingredient extends Component {
                     <Card.Content>In {this.props.cocktailCount} cocktails</Card.Content>
                     <Card.Content>{ingredient.category}</Card.Content>
                 </Card.Content>
-                <Button 
-                    attached='bottom'
-                    content='Add to My Ingredients'
-                    onClick={this.localAddHandler}
-                />
-                <Button 
-                    attached='bottom'
-                    content='Add to Shopping List'
-                    onClick={this.localListHandler}
-                />
+                <Card.Content extra>
+                    <Button.Group>
+                        <Button 
+                            color='green'
+                            
+                            content='My Ingredients'
+                            onClick={this.localAddHandler}
+                            />
+
+                        <Button 
+                            color='blue'
+                            content='Shopping List'
+                            onClick={this.localListHandler}
+                            />
+                    </Button.Group>
+                </Card.Content>
                 {/* <Button 
                     attached='bottom'
                     content='plswork'

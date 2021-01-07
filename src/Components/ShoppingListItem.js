@@ -19,13 +19,29 @@ class ShoppingListItem extends Component {
         return (
             <Card>
                 <Image src={listItem.image_url} />
-                <Card.Header>pls</Card.Header>
+                <Card.Content>
+                    <Card.Header>{listItem.name}</Card.Header>
+                    <Card.Description>{listItem.category}</Card.Description>
+                    {/* <Card.Content>Stock: {this.showStock()}</Card.Content> */}
+                </Card.Content>
+                <Card.Content extra>
+
                 <Button 
-                    attached='bottom'
-                    content='remove from shopping list'
+                    negative
+                    content='Remove from Shopping list'
                     onClick={this.deleteItem}
-                />
+                    />
+                    </Card.Content>
             </Card>
+            // <Card>
+            //     <Image src={listItem.image_url} />
+            //     <Card.Header>pls</Card.Header>
+            //     <Button 
+            //         attached='bottom'
+            //         content='remove from shopping list'
+            //         onClick={this.deleteItem}
+            //     />
+            // </Card>
         );
     }
 }

@@ -55,19 +55,17 @@ class UserIngredient extends Component {
                 <Image src={ingredient.image_url} />
                 <Card.Content>
                     <Card.Header>{ingredient.name}</Card.Header>
-                    <Card.Content>In {this.props.cocktailCount} cocktails</Card.Content>
-                    <Card.Content>{ingredient.category}</Card.Content>
+                    <Card.Description>In {this.props.cocktailCount} cocktails</Card.Description>
                     {/* <Card.Content>Stock: {this.showStock()}</Card.Content> */}
                 </Card.Content>
+                <Card.Content extra>
+
                 <Button 
-                    attached='bottom'
+                    negative
                     content='remove from ingredients'
                     onClick={this.localDeleteHandler}
-                />
-
-                    {/* <Button attached='bottom' onClick={this.handleRunLow}>
-                        {this.checkRunLow()}
-                    </Button> */}
+                    />
+                    </Card.Content>
             </Card>
         );
     }
