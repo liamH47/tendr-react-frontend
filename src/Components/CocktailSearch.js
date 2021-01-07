@@ -5,7 +5,7 @@ const CocktailSearch = ({ searchValue, changeHandler }) => {
     return(
         <div>
             <Form size='mini'>
-                <Form.Input size='small' type="text" value={searchValue} onChange={changeHandler} placeholder="search by name" />
+                <Form.Input size='mini' type="text" value={searchValue} onChange={changeHandler} placeholder="search by name" />
             </Form>
         </div>
     ) 

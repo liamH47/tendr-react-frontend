@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getSavedCocktails } from '../Redux/actions'
 import SavedCocktailItem from '../Components/SavedCocktailItem'
-import { Segment, Item } from 'semantic-ui-react'
+import { Segment, Item, Card } from 'semantic-ui-react'
 
 class SavedCocktailsCont extends Component {
 
@@ -25,9 +25,9 @@ class SavedCocktailsCont extends Component {
         {this.props.savedCocktails.length ? 
         <Segment basic padded='very' vertical>
             <h2>Saved Cocktails</h2>
-            <Item.Group relaxed divided>
+            <Card.Group centered >
                 {this.renderCocktails()}
-            </Item.Group>
+            </Card.Group>
         </Segment>
         : <h2>loading</h2>}
         </>
