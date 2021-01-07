@@ -55,11 +55,9 @@ class AllCocktails extends Component {
                         {/* <Item.Group relaxed divided>
                             {this.renderAllCocktails()}
                         </Item.Group> */}
-                    <Segment>
-                        <Card.Group centered >
+                        <Card.Group className='card-group' centered >
                             {this.renderAllCocktails()}
-                            </Card.Group>
-                    </Segment>
+                        </Card.Group>
                 </Container>
                  : <h2>loading</h2>
                  }

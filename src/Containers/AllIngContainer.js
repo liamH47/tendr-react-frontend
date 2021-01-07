@@ -51,7 +51,6 @@ class AllIngContainer extends Component {
       }
 
 
-
     render() {
         return (
             <> {this.props.ingredientsApi.length ? 
@@ -61,7 +60,7 @@ class AllIngContainer extends Component {
                     <IngredientSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
                 </Segment>
                 <Segment basic padded='very' vertical>
-                    <Card.Group centered>
+                    <Card.Group className='card-group' centered>
                         {this.renderIngredients()}
                     </Card.Group>
                 </Segment>

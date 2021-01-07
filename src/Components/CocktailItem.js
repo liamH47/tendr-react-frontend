@@ -119,11 +119,11 @@ class CocktailItem extends Component {
                             </Modal.Header>
                                 <Segment>
                                     <Grid columns={3} stackable>
-                                        <Grid.Column width={6} >
+                                        <Grid.Column width={8} >
                                             <Image src={cocktail.image_url} alt={cocktail.name} size='large' rounded floated='left' />
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
-                                            <List relaxed  verticalAlign='left'>
+                                        <Grid.Column className='cocktail-column' width={4}>
+                                            <List relaxed verticalAlign='left'>
                                                 <List.Item><strong>Category:</strong> {cocktail.category}</List.Item>
                                                 <List.Item><strong>Glass:</strong> {cocktail.recommended_glass}</List.Item>
                                                 <List.Item><strong>Ice:</strong> {cocktail.recommended_ice}</List.Item>
@@ -136,7 +136,7 @@ class CocktailItem extends Component {
                                             {/* <Label>Category: {cocktail.category}</Label>
                                             <Label>{this.howManyIngs(this.props.cocktail)}</Label> */}
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column className='cocktail-column' width={4}>
             
                                             <List animated relaxed='very' verticalAlign='left'>
                                                 <List.Header textAlign='center'>{this.howManyIngs(this.props.cocktail)}</List.Header>

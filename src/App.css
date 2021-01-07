@@ -1,11 +1,13 @@
 .App {
   /* text-align: center; */
   /* background-attachment: fixed; */
-  background-color: #FFF8E7;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
+html{
+  background-color: #FFF8E7;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -15,6 +17,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.card-group {
+  background: transparent;
 }
 
 .main {
@@ -36,7 +42,7 @@
 
 .header-grid {
   /* height: 100vh; */
-  width: 200px;
+
   grid-area: leftnav;
   /* border: 2px solid blue; */
   background-color: rgba(14, 13, 13, 0.925);
@@ -77,3 +83,13 @@
   grid-area: header;
   width: 100%;
 }
+
+
+.cocktail-column {
+  display: flex !important;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+/* align: flex-end; for images */
