@@ -18,7 +18,7 @@ class LogInForm extends Component {
     loginHandler = (e) => {
         e.preventDefault()
         this.props.loginHandler(this.state)
-        this.props.history.push('/find_ingredients')
+        this.props.history.push('/explore_cocktails')
         console.log("current user after pressing log in:",this.props.currentUser)
 
     }

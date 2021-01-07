@@ -109,7 +109,7 @@ class SavedCocktailItem extends Component {
                     {this.props.savedCocktail.cocktail.name}
                 </Card.Content>
                 <Card.Content extra>
-                <Modal
+                <Modal className='cocktail-modal'
                             size='large'
                             closeIcon
                             onClose={() => this.toggleModal()}
@@ -129,10 +129,10 @@ class SavedCocktailItem extends Component {
                             </Modal.Header>
                                 <Segment>
                                     <Grid columns={4} stackable>
-                                        <Grid.Column width={6} >
+                                        <Grid.Column width={7} >
                                             <Image src={this.props.savedCocktail.cocktail.image_url} alt={this.props.savedCocktail.cocktail.name} size='large' rounded floated='left' />
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column className='cocktail-column' width={3}>
                                             <List relaxed  verticalAlign='left'>
                                                 <List.Item><strong>Category:</strong> {this.props.savedCocktail.cocktail.category}</List.Item>
                                                 <List.Item><strong>Glass:</strong>{this.props.savedCocktail.cocktail.recommended_glass}</List.Item>
@@ -146,7 +146,7 @@ class SavedCocktailItem extends Component {
                                             {/* <Label>Category: {cocktail.category}</Label>
                                             <Label>{this.howManyIngs(this.props.cocktail)}</Label> */}
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column className='cocktail-column' width={3}>
             
                                             <List animated relaxed='very' verticalAlign='left'>
                                                 <List.Header textAlign='center'>{this.howManyIngs(this.props.cocktail)}</List.Header>
@@ -154,7 +154,7 @@ class SavedCocktailItem extends Component {
                                             </List>
 
                                         </Grid.Column > 
-                                        <Grid.Column width={3}>
+                                        <Grid.Column className='cocktail-column' width={3}>
                                             <List verticalAlign='middle' bulleted floated='right'>
                                                 <List.Header>My Notes</List.Header>
                                                 {this.props.savedCocktail.notes.map(element => <List.Item floated='left'><List.Content floated='left'>{element}</List.Content></List.Item>)}

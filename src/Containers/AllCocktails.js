@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Image, Card, Container} from 'semantic-ui-react'
+import { Segment, Image, Card, Container, Divider} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 import CocktailItem from '../Components/CocktailItem'
@@ -58,16 +58,19 @@ class AllCocktails extends Component {
                         <h2 className='content-header'>Search by Name</h2>
                         <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
                     </Segment>
-                        <h2 className='content-header'>Possible Cocktails</h2>
-                        <Card.Group className='card-group' centered >
-                            {this.renderMyCocktails()}
-                        </Card.Group>
-                        {/* <Item.Group relaxed divided>
-                            {this.renderAllCocktails()}
-                        </Item.Group> */}
                         <h2 className='content-header'>All Cocktails</h2>
                         <Card.Group className='card-group' centered >
                             {this.renderAllCocktails()}
+                        </Card.Group>
+                        <>
+                        <Divider horizontal></Divider>
+                        </>
+                        {/* <Item.Group relaxed divided>
+                            {this.renderAllCocktails()}
+                        </Item.Group> */}
+                        <h2 className='content-header'>Possible Cocktails</h2>
+                        <Card.Group className='card-group' centered >
+                            {this.renderMyCocktails()}
                         </Card.Group>
                 </Container>
                  : <Loading />}
