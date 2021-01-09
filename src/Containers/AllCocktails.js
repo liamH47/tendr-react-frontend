@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Image, Card, Container, Divider} from 'semantic-ui-react'
+import { Segment, Image, Card, Container, Divider, Dropdown} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 import FilterCocktails from '../Components/FilterCocktails'
@@ -21,7 +21,7 @@ class AllCocktails extends Component {
     }
 
     categoryHandler = (e) => {
-        this.setState({ dropdownCat: e.target.value})
+        this.setState({ currentCat: e.target.value})
     }
 
     componentDidMount() {
@@ -74,7 +74,14 @@ class AllCocktails extends Component {
                     <Segment textAlign='center' basic padded='very' vertical>
                         <h2 className='content-header'>Search by Name</h2>
                         <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
-                        <FilterCocktails categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} />
+                        <Dropdown
+                            onChange={this.categoryHandler}
+                            options={this.state.categoryOptions}
+                            placeholder='Choose a Category'
+                            selection
+                            value={this.state.currentCat}
+                        />
+                        {/* <FilterCocktails categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} /> */}
                     </Segment>
                         <h2 className='content-header'>All Cocktails</h2>
                         <Card.Group className='card-group' centered >
