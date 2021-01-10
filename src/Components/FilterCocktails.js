@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import { Dropdown, Grid, Segment } from 'semantic-ui-react'
+import { Dropdown, Grid, Segment, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 
 class FilterCocktails extends Component {
 
-    state = {
-        catOptions: []
+    state =  {
+        searchValue: "",
+        currentCat: "",
+        categoryOptions: []
+    }
+
+    changeHandler = (e) => {
+        this.setState({ searchValue: e.target.value })
+    }
+
+    categoryHandler = (e) => {
+        this.setState({...this.state, currentCat: e.target.value})
     }
 
     componentDidMount() {
+        this.props.fetchCocktails()
         console.log("in filter component cdm, props:", this.props.cocktailsApi)
         this.setCategories()
     }
@@ -24,17 +35,27 @@ class FilterCocktails extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Plswork</h3>
-                <Dropdown 
-                    onChange={this.props.categoryHandler}
-                    options={this.state.catOptions}
-                    placeholder='Choose a Category'
-                    selection
-                    clearable
-                    value={this.props.currentCat}
-                />
-            </div>
+        <div className='search-form'>
+            <Form >
+                <Form.Field>
+                    <label>Search by Name</label>
+                    <Form.Input type="text" value={this.state.searchValue} onChange={this.changeHandler} placeholder="search by name" />
+                </Form.Field>
+                <Form.Field>
+                    <label>Filter by Category</label>
+                    <Form.Dropdown 
+                        onChange={this.categoryHandler}
+                        options={this.state.categoryOptions}
+                        placeholder='Choose a Category'
+                        clearable
+                        fluid
+                        search
+                        selection
+                        value={this.state.currentCat}
+                    />
+                </Form.Field>
+            </Form>
+        </div>
         );
     }
 }

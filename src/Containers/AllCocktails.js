@@ -21,7 +21,7 @@ class AllCocktails extends Component {
     }
 
     categoryHandler = (e) => {
-        this.setState({ currentCat: e.target.value})
+        this.setState({currentCat: e.target.value})
     }
 
     componentDidMount() {
@@ -43,7 +43,8 @@ class AllCocktails extends Component {
         // let sorted = filtered.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
         let sorted = this.props.cocktailsApi.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
         let searchArray = sorted.filter(cocktail => cocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()))
-        return searchArray.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
+        let filtered = searchArray.filter(cocktail => cocktail.category.includes(this.state.currentCat))
+        return filtered.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
      }
 
      renderMyCocktails = () => {
@@ -73,7 +74,7 @@ class AllCocktails extends Component {
                 <Container textAlign='center'>
                     <Segment textAlign='center' basic padded='very' vertical>
                         <h2 className='content-header'>Search by Name</h2>
-                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
+                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} />
                         <Dropdown
                             onChange={this.categoryHandler}
                             options={this.state.categoryOptions}
