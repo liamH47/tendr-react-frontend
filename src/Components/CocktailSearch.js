@@ -9,23 +9,27 @@ const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCa
                     <label>Search by Name</label>
                     <Form.Input type="text" value={searchValue} onChange={changeHandler} placeholder="search by name" />
                 </Form.Field>
-                <Form.Field>
+            </Form>
+            {/* <Form>
+
+                <Form.Field> */}
                     <label>Filter by Category</label>
-                    <Form.Dropdown 
-                        onChange={categoryHandler}
+                    <Dropdown 
+                        onChange={categoryHandler, console.log("changing category")}
                         options={categoryOptions}
-                        placeholder='Choose a Category'
-                        clearable
-                        fluid
-                        search
                         selection
                         value={currentCat}
-                    />
-                </Form.Field>
-            </Form>
+                        defaultValue=''
+                        />
+                {/* </Form.Field>
+            </Form> */}
         </div>
     ) 
 
 }
 
 export default CocktailSearch
+// placeholder='Choose a Category'
+// clearable
+// fluid
+// search

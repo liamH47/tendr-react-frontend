@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, Grid, Segment, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getUserIngredients, getCocktails} from '../Redux/actions'
+import {getCocktails} from '../Redux/actions'
 
 class FilterCocktails extends Component {
 
@@ -39,17 +39,16 @@ class FilterCocktails extends Component {
             <Form >
                 <Form.Field>
                     <label>Search by Name</label>
-                    <Form.Input type="text" value={this.state.searchValue} onChange={this.changeHandler} placeholder="search by name" />
+                    <Form.Input type="text" value={this.props.searchValue} onChange={this.props.changeHandler} placeholder="search by name" />
                 </Form.Field>
                 <Form.Field>
                     <label>Filter by Category</label>
                     <Form.Dropdown 
-                        onChange={this.categoryHandler}
-                        options={this.state.categoryOptions}
+                        onChange={this.props.categoryHandler}
+                        options={this.props.categoryOptions}
                         placeholder='Choose a Category'
                         clearable
                         fluid
-                        search
                         selection
                         value={this.state.currentCat}
                     />
