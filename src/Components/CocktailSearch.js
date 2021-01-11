@@ -14,12 +14,13 @@ const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCa
                     <Form.Dropdown 
                         onChange={categoryHandler}
                         options={categoryOptions}
-                        placeholder='Choose a Category'
-                        clearable
+                        // placeholder='Choose a Category'
+                        // clearable
                         fluid
-                        search
+                        // search
                         selection
                         value={currentCat}
+                        defaultValue='All'
                     />
                 </Form.Field>
             </Form>
