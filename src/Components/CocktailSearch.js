@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormInput, Input, Dropdown } from 'semantic-ui-react'
+import { Form, FormInput, Input, Dropdown, Select } from 'semantic-ui-react'
 
 const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCat, categoryOptions }) => {
     return(
@@ -9,7 +9,8 @@ const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCa
                     <label>Search by Name</label>
                     <Form.Input type="text" value={searchValue} onChange={changeHandler} placeholder="search by name" />
                 </Form.Field>
-                <Form.Field>
+                <Select defaultValue='All' options={categoryOptions} onChange={categoryHandler} />
+                {/* <Form.Field>
                     <label>Filter by Category</label>
                     <Form.Dropdown 
                         onChange={categoryHandler}
@@ -22,7 +23,7 @@ const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCa
                         value={currentCat}
                         defaultValue='All'
                     />
-                </Form.Field>
+                </Form.Field> */}
             </Form>
         </div>
     ) 

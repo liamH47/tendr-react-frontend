@@ -40,12 +40,12 @@ class AllCocktails extends Component {
 
     renderAllCocktails = () => {
         let sorted = this.props.cocktailsApi.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
+        let searchArray = sorted.filter(cocktail => cocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()))
         if(this.state.currentCat === "All"){
-            let searchArray = sorted.filter(cocktail => cocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()))
             // let filtered = searchArray.filter(cocktail => cocktail.category.includes(this.state.currentCat))
             return searchArray.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
         } else {
-            let filtered = sorted.filter(cocktail => cocktail.category.includes(this.state.currentCat))
+            let filtered = searchArray.filter(cocktail => cocktail.category.includes(this.state.currentCat))
             return filtered.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
         }
     }
