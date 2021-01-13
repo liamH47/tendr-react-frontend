@@ -27,13 +27,19 @@ class AllCocktails extends Component {
     //     this.setState({currentCat: e.target.value})
     // }
 
-    categoryHandler = ({ target: { value }} ) => {
-        this.setState({ currentCat: value }, () => console.log(this.state))
+    // categoryHandler = ({ target: { value }} ) => {
+    //     this.setState({ currentCat: value }, () => console.log(this.state))
+    // }
+    categoryHandler = (e) => {
+        this.setState({currentCat: e.target.value})
     }
 
     setCategories = () => {
+        //do logic from the FilterCocktails component here.  Make sure there is an 'all' being added to categoryOptions being passed down.
         let allCats = this.props.cocktailsApi.map(cocktail => cocktail.category)
         let uniqueCats = [...new Set(allCats)]
+        let defaultCat = ["All"]
+        let catObj = defaultCat.concat(uniqueCats)
         let selectionsObj = uniqueCats.map(category => ({ key: category, text: category, value: category }))
         this.setState({ categoryOptions: selectionsObj})
     }
@@ -85,9 +91,9 @@ class AllCocktails extends Component {
             <> {this.props.cocktailsApi.length ? 
                 <Container textAlign='center'>
                     <Segment textAlign='center' basic padded='very' vertical>
-                        <h2 className='content-header'>Search by Name</h2>
-                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} />
-                        <FilterCocktails categoryHandler={this.categoryHandler}/>
+                        {/* <h2 className='content-header'>Search by Name</h2>
+                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} /> */}
+                        <FilterCocktails changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} categoryOptions={this.state.categoryOptions} currentCat={this.state.currentCat} />
                     </Segment>
                         <h2 className='content-header'>All Cocktails</h2>
                         <Card.Group className='card-group' centered >

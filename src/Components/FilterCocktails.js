@@ -24,26 +24,57 @@ class FilterCocktails extends Component {
         // console.log("in filter component cdm, props:", this.props.cocktailsApi)
         // this.setCategories()
     }
+
+    resetCats = () => {
+        // let allCats = this.props.cocktailsApi.map(cocktail => cocktail.category)
+        // let uniqueCats = [...new Set(allCats)]
+        // let defaultCat = ["All"]
+        // let catObj = uniqueCats.map(category => ({ key: category, text: category, value: category }))
+        // let plsWork = defaultCat.concat(catObj)
+        // console.log(plsWork) 
+        // let dropdownItems = plsWork.map(category => <Dropdown.Item key={category} text={category} value={category} />)
+        // return uniqueCats.map(category => ({ key: category, text: category, value: category }))
+        // this.setState({ categoryOp})
+        return this.props.categoryOptions.map(option => <Dropdown.Item key={option.key} value={option.value} text={option.text} />)
+    }
     
     setCategories = () => {
         let allCats = this.props.cocktailsApi.map(cocktail => cocktail.category)
         let uniqueCats = [...new Set(allCats)]
         // let selectionsObj = 
-        // return uniqueCats.map(category => ({ key: category, text: category, value: category }))
         return uniqueCats.map(category => <option value={category}>{category}</option>)
         // this.setState({ catOptions: selectionsObj})
         // return selectionsObj
     }
-
+//next, try putting the search in here
     render() {
         return (
         <div className='search-form'>
-            {/* <Form >
+            <Form >
                 <Form.Field>
                     <label>Search by Name</label>
-                    <Form.Input type="text" value={this.state.searchValue} onChange={this.changeHandler} placeholder="search by name" />
+                    <Form.Input type="text" value={this.props.searchValue} onChange={this.props.changeHandler} placeholder="search by name" />
                 </Form.Field>
                 <Form.Field>
+                    <Dropdown on>
+                        <Dropdown.Menu>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    {/* <Form.Select 
+                        fluid
+                        label='Category'
+                        options={this.resetCats()}
+                        // defaultValue="All"
+                        onChange={this.props.categoryHandler}
+                        name='category'
+                    >
+                        {/* <option key='All' text='All' value='All' ></option>
+                        {this.resetCats()} */}
+                    {/* </Form.Select> */} 
+
+                </Form.Field>
+                {/* <Form.Field>
                     <label>Filter by Category</label>
                     <Form.Dropdown 
                         onChange={this.categoryHandler}
@@ -55,8 +86,8 @@ class FilterCocktails extends Component {
                         selection
                         value={this.state.currentCat}
                     />
-                </Form.Field>
-            </Form> */}
+                </Form.Field> */}
+            </Form>
             <h1>plswork</h1>
             <select name='category' id='category' onChange={this.props.categoryHandler}>
                 <option value="All">All</option>

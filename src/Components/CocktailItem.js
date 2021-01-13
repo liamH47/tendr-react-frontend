@@ -26,7 +26,7 @@ class CocktailItem extends Component {
         this.props.fetchIngredients()
         this.props.fetchUserIngs()
         this.props.fetchShoppingList()
-        console.log(this.props.currentUser)
+        // console.log(this.props.currentUser)
         this.setState({ clicked: false, open: false})
         // debugger
     }
