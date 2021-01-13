@@ -9,21 +9,15 @@ const CocktailSearch = ({ searchValue, changeHandler, categoryHandler, currentCa
                     <label>Search by Name</label>
                     <Form.Input type="text" value={searchValue} onChange={changeHandler} placeholder="search by name" />
                 </Form.Field>
-                <Select defaultValue='All' options={categoryOptions} onChange={categoryHandler} />
-                {/* <Form.Field>
-                    <label>Filter by Category</label>
-                    <Form.Dropdown 
-                        onChange={categoryHandler}
-                        options={categoryOptions}
-                        // placeholder='Choose a Category'
-                        // clearable
+                <Form.Field>
+                    <Form.Select 
                         fluid
-                        // search
-                        selection
-                        value={currentCat}
+                        options={categoryOptions}
+                        placeholder='Category'
+                        onChange={categoryHandler}
                         defaultValue='All'
                     />
-                </Form.Field> */}
+                </Form.Field>
             </Form>
         </div>
     ) 
