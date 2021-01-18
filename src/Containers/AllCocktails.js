@@ -3,9 +3,7 @@ import { Segment, Image, Card, Container, Divider, Dropdown} from 'semantic-ui-r
 import { connect } from 'react-redux'
 import { getUserIngredients, getCocktails} from '../Redux/actions'
 import FilterCocktails from '../Components/FilterCocktails'
-// import CocktailFilter from '../Components/FilterCocktails'
 import CocktailItem from '../Components/CocktailItem'
-import CocktailSearch from '../Components/CocktailSearch'
 import Loading from '../Components/Loading'
 
 class AllCocktails extends Component {
@@ -20,16 +18,6 @@ class AllCocktails extends Component {
         this.setState({ searchValue: e.target.value })
     }
 
-    // change category handler
-    // conditional or ternary in render that checks if category is 'all'
-
-    // categoryHandler = (e) => {
-    //     this.setState({currentCat: e.target.value})
-    // }
-
-    // categoryHandler = ({ target: { value }} ) => {
-    //     this.setState({ currentCat: value }, () => console.log(this.state))
-    // }
     categoryHandler = (e) => {
         this.setState({currentCat: e.target.value})
     }
@@ -91,8 +79,6 @@ class AllCocktails extends Component {
             <> {this.props.cocktailsApi.length ? 
                 <Container textAlign='center'>
                     <Segment textAlign='center' basic padded='very' vertical>
-                        {/* <h2 className='content-header'>Search by Name</h2>
-                        <CocktailSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} categoryOptions={this.state.categoryOptions} /> */}
                         <FilterCocktails changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} categoryOptions={this.state.categoryOptions} currentCat={this.state.currentCat} />
                     </Segment>
                         <h2 className='content-header'>All Cocktails</h2>
@@ -131,12 +117,3 @@ function msp(state){
 
 
 export default connect(msp, mdp)(AllCocktails);
-{/* <Dropdown
-    onChange={this.categoryHandler}
-    options={this.state.categoryOptions}
-    placeholder='Choose a Category'
-    selection
-    value={this.state.currentCat}
-/> */}
-// let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === false)
-// let sorted = filtered.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
