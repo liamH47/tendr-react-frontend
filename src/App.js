@@ -38,7 +38,7 @@ class App extends React.Component {
           <BrowserRouter>
             <div className='main'>
               <TendrHeader />
-              <Header />
+              {/* <Header /> */}
               <MainContainer />
             </div>
           </BrowserRouter>
