@@ -35,9 +35,9 @@ html{
   height: 100%;
   display: inline-grid; 
   grid-template-areas: 
-  "header header header header"
-  "leftnav contentarea contentarea contentarea" 
-  "leftnav contentarea contentarea contentarea";
+  "header header header"
+  "contentarea contentarea contentarea" 
+  "contentarea contentarea contentarea";
 }
 
 .header-grid {
@@ -82,6 +82,7 @@ html{
 .header {
   grid-area: header;
   width: 100%;
+  justify-content: center;
 }
 
 

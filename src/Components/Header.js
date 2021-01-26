@@ -6,7 +6,7 @@ const Header = () => {
     return (
         // <Sticky>
             <div className='header-grid'>
-                <Menu fluid vertical inverted>
+                <Menu fluid inverted>
                     {/* <Menu.Item as={NavLink} to="/my_cocktails">My Cocktails</Menu.Item> */}
                     <Menu.Item as={NavLink} to="/welcome">Welcome</Menu.Item>
                     <Menu.Item as={NavLink} to="/find_ingredients">Find Ingredients</Menu.Item>

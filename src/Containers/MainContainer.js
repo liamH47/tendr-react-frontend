@@ -11,7 +11,6 @@ import AllCocktails from './AllCocktails'
 import { loggedIn } from '../Redux/actions'
 import { connect } from 'react-redux'
 import { Container } from 'semantic-ui-react'
-// import AllCocktails from './AllCocktails'
 
 class MainContainer extends Component {
 
@@ -24,12 +23,12 @@ class MainContainer extends Component {
             <div className='main-content'>
                 {/* <Header /> */}
                 <Switch>
+                    <Route path='/welcome' render={() => <LogInContainer />} />
                     <Route path='/my_ingredients' render={() => <MyIngrContainer />} />
                     <Route path='/find_ingredients' render={() => <AllIngContainer />} />
                     <Route path='/my_cocktails' render={() => <MyCocktailsCont />} />
                     <Route path='/explore_cocktails' render={() => <AllCocktails />}/>
                     <Route path='/shopping_list' render={() => <ShoppingListCont />}/>
-                    <Route path='/welcome' render={() => <LogInContainer />} />
                     <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
                 </Switch>               
 
