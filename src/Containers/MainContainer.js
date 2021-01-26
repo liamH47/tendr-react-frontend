@@ -30,6 +30,7 @@ class MainContainer extends Component {
                     <Route path='/explore_cocktails' render={() => <AllCocktails />}/>
                     <Route path='/shopping_list' render={() => <ShoppingListCont />}/>
                     <Route path='/saved_cocktails' render={() => <SavedCocktailsCont />} />
+                    <Route path='*' component={LogInContainer} />
                 </Switch>               
 
             </div>

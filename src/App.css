@@ -40,16 +40,14 @@ html{
   "contentarea contentarea contentarea";
 }
 
-.header-grid {
-  /* height: 100vh; */
 
-  grid-area: leftnav;
-  /* border: 2px solid blue; */
-  background-color: rgba(14, 13, 13, 0.925);
+.header h1{
+  font-size: 5rem;
 }
 
 .main-content {
   grid-area: contentarea;
+  justify-content: center;
   /* border: 2px solid green */
 }
 
@@ -83,6 +81,12 @@ html{
   grid-area: header;
   width: 100%;
   justify-content: center;
+  /* position: fixed; */
+  /* z-index: 100; */
+}
+
+.cocktail-container {
+  justify-content: center;
 }
 
 
@@ -94,9 +98,13 @@ html{
   font-size: 20px;
 }
 
-.search-form {
-  padding: 20px;
-  width: 40%;
+.search-form input{
+  font-size: 150%;
+  /* padding: 20px;
+  width: 40%; */
+}
+.search-form select{
+  font-size: 150%;
 }
 
 .cocktail-image {
