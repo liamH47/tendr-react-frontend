@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Menu } from 'semantic-ui-react'
+import { Segment, Menu, Sticky } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -8,6 +8,8 @@ class TendrHeader extends Component {
         return (
             <> {this.props.currentUser ?
             <div className='header'>
+                <Sticky>
+
                 <Segment textAlign='center' inverted vertical>
                     <h1><strong>tendr</strong></h1>
 
@@ -23,11 +25,15 @@ class TendrHeader extends Component {
                     
 
                 </Segment>               
+                </Sticky>
             </div>
             : <div className='header'>
+                <Sticky>
+
             <Segment textAlign='center' inverted vertical>
                 <h1><strong>tendr</strong></h1>
             </Segment>               
+                </Sticky>
             </div>}
             </>
         );
