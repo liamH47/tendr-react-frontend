@@ -6,9 +6,11 @@ import { connect } from 'react-redux'
 class TendrHeader extends Component {
     render() {
         return (
+            <> {this.props.currentUser ?
             <div className='header'>
                 <Segment textAlign='center' inverted vertical>
                     <h1><strong>tendr</strong></h1>
+
                     <Menu fluid inverted>
                     {/* <Menu.Item as={NavLink} to="/my_cocktails">My Cocktails</Menu.Item> */}
                     <Menu.Item as={NavLink} to="/welcome">Welcome</Menu.Item>
@@ -17,9 +19,17 @@ class TendrHeader extends Component {
                     <Menu.Item as={NavLink} to="/my_ingredients">My Ingredients({this.props.userIngApi.length})</Menu.Item>
                     <Menu.Item as={NavLink} to="/shopping_list">Shopping List({this.props.shoppingListApi.length})</Menu.Item>
                     <Menu.Item as={NavLink} to="/saved_cocktails">Saved Cocktails({this.props.savedCocktails.length})</Menu.Item>
-                </Menu>
+                    </Menu>
+                    
+
                 </Segment>               
             </div>
+            : <div className='header'>
+            <Segment textAlign='center' inverted vertical>
+                <h1><strong>tendr</strong></h1>
+            </Segment>               
+            </div>}
+            </>
         );
     }
 }
@@ -35,3 +45,4 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(TendrHeader);
+
