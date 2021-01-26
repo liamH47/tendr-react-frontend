@@ -6,16 +6,21 @@ import {getIngredients, getUserIngredients, getCocktails} from '../Redux/actions
 import { Redirect } from 'react-router-dom'
 import IngredientSearch from '../Components/IngredientSearch'
 import Loading from '../Components/Loading'
+import FilterIngredients from '../Components/FilterIngredients'
 
 class AllIngContainer extends Component {
 
     state =  {
         searchValue: "",
-        // categories: []
+        currentCat: "All"
     }
 
     changeHandler = (e) => {
         this.setState({ searchValue: e.target.value })
+    }
+
+    categoryHandler = (e) => {
+        this.setState({currentCat: e.target.value})
     }
  
     componentDidMount() {
@@ -25,10 +30,6 @@ class AllIngContainer extends Component {
             // debugger
     }
 
-    // setCategories = () => {
-    //     let 
-    // }
-
     renderIngredients = () => {
         if(this.props.userIngApi.length > 0) {
             let ids = this.props.userIngApi.map(obj => obj.ingredient_id)
@@ -36,11 +37,22 @@ class AllIngContainer extends Component {
             let filtered = ingredients.filter((obj) => !ids.includes(obj.id))
             let sorted = filtered.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             let searchArray = sorted.filter(ingredient => ingredient.name.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
-            return searchArray.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            if(this.state.currentCat === "All"){
+
+                return searchArray.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            }else{
+                let catFilter = searchArray.filter(ingredient => ingredient.category.includes(this.state.currentCat))
+                return catFilter.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            }
         } else {
             let sorted2 = this.props.ingredientsApi.sort((a, b) => this.cocktailCount(b) -this.cocktailCount(a))
             let searchArray2 = sorted2.filter(ingredient => ingredient.name.toLowerCase().includes(this.state.searchValue.toLocaleLowerCase()));
-            return searchArray2.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            if(this.state.currentCat === "All"){
+                return searchArray2.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            }else{
+                let filtered2 = searchArray2.filter(ingredient => ingredient.category.includes(this.state.currentCat))
+                return filtered2.map(ingObj => <Ingredient currentUser={this.props.currentUser} cocktailCount={this.cocktailCount(ingObj)} ingredient={ingObj} key={ingObj.id} id={ingObj.id} />)
+            }
         }
     }
 
@@ -51,14 +63,13 @@ class AllIngContainer extends Component {
         return totalCocktails.length
       }
 
-
     render() {
         return (
             <> {this.props.ingredientsApi.length ? 
             <Container>
                 <Segment textAlign='center' basic padded='very' vertical>
                     <h2>Ingredients</h2>
-                    <IngredientSearch changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
+                    <FilterIngredients categoryHandler={this.categoryHandler} changeHandler={this.changeHandler} searchValue={this.state.searchValue} />
                 </Segment>
                 <Segment basic padded='very' vertical>
                     <Card.Group className='card-group' centered>

@@ -114,12 +114,12 @@ class CocktailItem extends Component {
                                 }}
                                 />
                             }>
-                            <Modal.Header textAlign='center' >
+                            <Modal.Header className='modal-header' textAlign='center' >
                                 <h3>{cocktail.name}</h3>
                             </Modal.Header>
                                 <Segment>
                                     <Grid columns={3} stackable>
-                                        <Grid.Column width={8} >
+                                        <Grid.Column width={8} className='modal-image-column' >
                                             <Image src={cocktail.image_url} alt={cocktail.name} size='large' rounded floated='left' />
                                         </Grid.Column>
                                         <Grid.Column className='cocktail-column' width={3}>

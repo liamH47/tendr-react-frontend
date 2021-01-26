@@ -10,8 +10,7 @@ class AllCocktails extends Component {
 
     state =  {
         searchValue: "",
-        currentCat: "All",
-        categoryOptions: []
+        currentCat: "All"
     }
 
     changeHandler = (e) => {
@@ -20,16 +19,6 @@ class AllCocktails extends Component {
 
     categoryHandler = (e) => {
         this.setState({currentCat: e.target.value})
-    }
-
-    setCategories = () => {
-        //do logic from the FilterCocktails component here.  Make sure there is an 'all' being added to categoryOptions being passed down.
-        let allCats = this.props.cocktailsApi.map(cocktail => cocktail.category)
-        let uniqueCats = [...new Set(allCats)]
-        let defaultCat = ["All"]
-        let catObj = defaultCat.concat(uniqueCats)
-        let selectionsObj = uniqueCats.map(category => ({ key: category, text: category, value: category }))
-        this.setState({ categoryOptions: selectionsObj})
     }
 
     renderAllCocktails = () => {
@@ -46,12 +35,7 @@ class AllCocktails extends Component {
 
     componentDidMount() {
         this.props.fetchCocktails()
-        this.setCategories()
-        // console.log(this.props.currentUser)
-        // debugger
     }
-
-
     
     renderMyCocktails = () => {
         let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === true)
@@ -78,10 +62,10 @@ class AllCocktails extends Component {
         return (
             <> {this.props.cocktailsApi.length ? 
                 <Container className='cocktails-container' textAlign='center'>
-                    <Segment textAlign='center' basic padded='very' vertical>
-                        <FilterCocktails changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} categoryOptions={this.state.categoryOptions} currentCat={this.state.currentCat} />
+                    <Segment className='search-container' textAlign='center' basic padded='very' vertical>
+                        <FilterCocktails changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} currentCat={this.state.currentCat} />
                     </Segment>
-                        <h2 className='content-header'>All Cocktails</h2>
+                    <Divider section horizontal></Divider>
                         <Card.Group className='card-group' centered >
                             {this.renderAllCocktails()}
                         </Card.Group>

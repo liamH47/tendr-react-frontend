@@ -6,7 +6,7 @@
 }
 
 html{
-  background-color: #FFF8E7;
+  background-color: #9afac5f8;
 }
 .App-logo {
   height: 40vmin;
@@ -23,10 +23,14 @@ html{
   background: transparent;
 }
 
+.modal-header {
+  background-color: #FFF8E7 !important;
+}
+
 .main {
   /* background-attachment: fixed; */
-  
-  background-color: #FFF8E7;
+  background-color: #98daade3; 
+  /* background-color: #FFF8E7; */
   /* display: inline-grid;
   grid-template-columns: auto 1fr;
   grid-template-areas: "leftnav contentarea"; */
@@ -37,7 +41,8 @@ html{
   grid-template-areas: 
   "header header header"
   "contentarea contentarea contentarea" 
-  "contentarea contentarea contentarea";
+  "contentarea contentarea contentarea"
+  "footer footer footer";
 }
 
 
@@ -46,10 +51,13 @@ html{
 }
 
 .main-content {
+  display: flex;
   grid-area: contentarea;
   justify-content: center;
+  align-items: center;
   /* border: 2px solid green */
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -76,6 +84,9 @@ html{
 }
 
 .login-container {
+  grid-area: contentarea;
+  width: 50%;
+  justify-content: center;
 }
 .header {
   grid-area: header;
@@ -84,18 +95,25 @@ html{
   /* position: fixed; */
   /* z-index: 100; */
 }
+.footer {
+  grid-area: footer;
+  width: 100%;
+}
 
 .cocktail-container {
   justify-content: center;
 }
 
-
+.modal-image-column {
+  background-color: #FFF8E7 !important;
+}
 .cocktail-column {
   display: flex !important;
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
-  font-size: 20px;
+  font-size: 14px;
+  background-color: #FFF8E7 !important;
 }
 
 .search-form input{
@@ -112,7 +130,7 @@ html{
 }
 
 .cocktail-modal {
-  background-color: #FFF8E7;
+  background-color: #FFF8E7 !important;
   background: transparent;
 }
 /* align: flex-end; for images */
