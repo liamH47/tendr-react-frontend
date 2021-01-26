@@ -18,17 +18,18 @@ class FilterCocktails extends Component {
     render() {
         return (
         <div className='search-form'>
-            <Form >
-                <Form.Field>
-                    <label>Search by Name</label>
-                    <Form.Input type="text" value={this.props.searchValue} onChange={this.props.changeHandler} placeholder="search by name" />
-                </Form.Field>                
-            </Form>
-            <h1>plswork</h1>
+            <form>
+
+            <h1>Search by name</h1>
+            <input name='search' type="text" value={this.props.searchValue} onChange={this.props.changeHandler} placeholder="search by name" />
+               
+
+            <h1>Filter by category</h1>
             <select name='category' id='category' onChange={this.props.categoryHandler}>
                 <option value="All">All</option>
                 {this.setCategories()}
             </select>
+            </form>
         </div>
         );
     }

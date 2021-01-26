@@ -77,7 +77,7 @@ class AllCocktails extends Component {
     render() {
         return (
             <> {this.props.cocktailsApi.length ? 
-                <Container textAlign='center'>
+                <Container className='cocktails-container' textAlign='center'>
                     <Segment textAlign='center' basic padded='very' vertical>
                         <FilterCocktails changeHandler={this.changeHandler} searchValue={this.state.searchValue} categoryHandler={this.categoryHandler} categoryOptions={this.state.categoryOptions} currentCat={this.state.currentCat} />
                     </Segment>
