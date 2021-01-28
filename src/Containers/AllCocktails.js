@@ -35,6 +35,8 @@ class AllCocktails extends Component {
 
     componentDidMount() {
         this.props.fetchCocktails()
+        this.props.fetchUserIngredients()
+        // debugger
     }
     
     renderMyCocktails = () => {
@@ -72,10 +74,10 @@ class AllCocktails extends Component {
                         <>
                         <Divider horizontal></Divider>
                         </>
-                        <h2 className='content-header'>Possible Cocktails</h2>
+                        {/* <h2 className='content-header'>Possible Cocktails</h2>
                         <Card.Group className='card-group' centered >
                             {this.renderMyCocktails()}
-                        </Card.Group>
+                        </Card.Group> */}
                 </Container>
                  : <Loading />}
             </>

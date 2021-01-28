@@ -98,6 +98,7 @@ html{
 .footer {
   grid-area: footer;
   width: 100%;
+  
 }
 
 .cocktail-container {

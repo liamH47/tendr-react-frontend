@@ -30,7 +30,7 @@ class MyIngrContainer extends Component {
             return (
                 <> {this.props.userIngApi.length ?                 
                 <Container>
-                    <Segment basic padded='very' vertical>
+                    <Segment textAlign='center' basic padded='very' vertical>
                         <h2>Current Ingredients</h2>
                         <Card.Group centered>
                         {this.renderMyIngredients()}
