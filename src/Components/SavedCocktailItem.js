@@ -104,7 +104,7 @@ class SavedCocktailItem extends Component {
         // const { savedCocktail } = this.props.savedCocktail
         return (
             <Card>
-                <Image bordered src={this.props.savedCocktail.cocktail.image_url}/>
+                <Image className='cocktail-image' bordered src={this.props.savedCocktail.cocktail.image_url}/>
                 <Card.Content>
                     {this.props.savedCocktail.cocktail.name}
                 </Card.Content>
@@ -124,12 +124,12 @@ class SavedCocktailItem extends Component {
                                 }}
                                 />
                             }>
-                            <Modal.Header textAlign='center' >
+                            <Modal.Header className='modal-header' textAlign='center' >
                                 <h3>{this.props.savedCocktail.cocktail.name}</h3>
                             </Modal.Header>
                                 <Segment>
                                     <Grid columns={4} stackable>
-                                        <Grid.Column width={7} >
+                                        <Grid.Column className='modal-image-column' width={7} >
                                             <Image src={this.props.savedCocktail.cocktail.image_url} alt={this.props.savedCocktail.cocktail.name} size='large' rounded floated='left' />
                                         </Grid.Column>
                                         <Grid.Column className='cocktail-column' width={3}>

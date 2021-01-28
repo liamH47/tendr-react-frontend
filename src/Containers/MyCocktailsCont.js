@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Segment, Container, Card} from 'semantic-ui-react'
-import UserCocktail from '../Components/UserCocktail';
+import CocktailItem from '../Components/CocktailItem';
 // import UserIngredient from '../Components/UserIngredient';
 import { connect } from 'react-redux'
 import {getUserIngredients, getCocktails} from '../Redux/actions'
+import { checkCanMake } from '../Helpers/checkCanMake'
 
 class MyCocktailsCont extends Component {
 
@@ -13,26 +14,25 @@ class MyCocktailsCont extends Component {
     }
     
     renderCocktails = () => {
-        let filtered = this.props.cocktailsApi.filter(el => this.checkCanMake(el, this.props.userIngApi) === true)
-        return filtered.map(tailObj => <UserCocktail cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
-     }
+        let filtered = this.props.cocktailsApi.filter(el => checkCanMake(el, this.props.userIngApi) === true)
+        return filtered.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)     }
 
-     checkCanMake(singleCockt, userIngApi) {
-         let cocktail = singleCockt.cocktail_ingredients
-         return cocktail.every(function(ing) {
-          return userIngApi.some(function(ing2) {
-            console.log(ing.name, ing2.name)
-            console.log(ing.quantity, ing2.quantity)
-             return (ing.name == ing2.name) && (ing.quantity <= ing2.quantity) 
-           })
-         })
-     }
+    //  checkCanMake(singleCockt, userIngApi) {
+    //      let cocktail = singleCockt.cocktail_ingredients
+    //      return cocktail.every(function(ing) {
+    //       return userIngApi.some(function(ing2) {
+    //         console.log(ing.name, ing2.name)
+    //         console.log(ing.quantity, ing2.quantity)
+    //          return (ing.name == ing2.name) && (ing.quantity <= ing2.quantity) 
+    //        })
+    //      })
+    //  }
 
 
     render() {
         return (
             <> {this.props.cocktailsApi.length ? 
-                <Segment basic padded='very' vertical>
+                <Segment textAlign='center' basic padded='very' vertical>
                     <h2>Possible Drinks</h2>
                     <Card.Group centered>
                         {this.renderCocktails()}

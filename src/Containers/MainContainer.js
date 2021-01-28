@@ -10,13 +10,12 @@ import LogInContainer from './LogInContainer';
 import AllCocktails from './AllCocktails'
 import { loggedIn } from '../Redux/actions'
 import { connect } from 'react-redux'
-import { Container } from 'semantic-ui-react'
 
 class MainContainer extends Component {
 
-    state = {
-        user: null
-    }
+    // state = {
+    //     user: null
+    // }
 
     render() {
         return (
