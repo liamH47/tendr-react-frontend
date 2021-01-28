@@ -49,6 +49,8 @@ export function getUserIngredients() {
     }
 }
 
+// this.props.userIngApi.filter(el => el.user_id === this.props.currentUser.user.id)
+
 export function getCocktails() {
     const token = localStorage.getItem('token')
     // debugger
