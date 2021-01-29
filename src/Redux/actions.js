@@ -49,8 +49,6 @@ export function getUserIngredients() {
     }
 }
 
-// this.props.userIngApi.filter(el => el.user_id === this.props.currentUser.user.id)
-
 export function getCocktails() {
     const token = localStorage.getItem('token')
     // debugger
@@ -83,9 +81,7 @@ export function addIngredient(userIngObj){
             dispatch({ type: ADD_USER_INGREDIENT, payload: obj})
             console.log("inside post", obj)
             })
-
     }
-
 }
 
 export function addToShoppingList(ingredient){
@@ -284,7 +280,7 @@ export function addNote(updateObj) {
 
     }
 }
-//savedObj will be the existing saved cocktail
+
 export function loggedIn() {
     const token = localStorage.getItem('token')
     return function(dispatch) {

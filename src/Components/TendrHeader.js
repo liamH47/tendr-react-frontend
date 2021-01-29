@@ -17,12 +17,9 @@ class TendrHeader extends Component {
             <> {this.props.currentUser ?
             <div className='header'>
                 <Sticky>
-
                 <Segment textAlign='center' inverted vertical>
                     <h1><strong>tendr</strong></h1>
-
                     <Menu fluid inverted>
-                    {/* <Menu.Item as={NavLink} to="/my_cocktails">My Cocktails</Menu.Item> */}
                     <Menu.Item as={NavLink} to="/welcome">Welcome</Menu.Item>
                     <Menu.Item as={NavLink} to="/find_ingredients">Find Ingredients</Menu.Item>
                     <Menu.Item as={NavLink} to="/explore_cocktails">Explore Cocktails</Menu.Item>
@@ -31,14 +28,11 @@ class TendrHeader extends Component {
                     <Menu.Item as={NavLink} to="/my_cocktails">My Cocktails ({this.possibleCocktails()})</Menu.Item>
                     <Menu.Item as={NavLink} to="/saved_cocktails">Saved Cocktails ({this.props.savedCocktails.length})</Menu.Item>
                     </Menu>
-                    
-
                 </Segment>               
                 </Sticky>
             </div>
             : <div className='header'>
                 <Sticky>
-
             <Segment textAlign='center' inverted vertical>
                 <h1><strong>tendr</strong></h1>
             </Segment>               

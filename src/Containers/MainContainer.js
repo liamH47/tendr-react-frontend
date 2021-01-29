@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../Components/Header'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import MyIngrContainer from './MyIngrContainer'
 import SavedCocktailsCont from './SavedCocktailsCont'
@@ -13,14 +12,9 @@ import { connect } from 'react-redux'
 
 class MainContainer extends Component {
 
-    // state = {
-    //     user: null
-    // }
-
     render() {
         return (
             <div className='main-content'>
-                {/* <Header /> */}
                 <Switch>
                     <Route path='/welcome' render={() => <LogInContainer />} />
                     <Route path='/my_ingredients' render={() => <MyIngrContainer />} />

@@ -18,14 +18,13 @@ class AllCocktails extends Component {
     }
 
     categoryHandler = (e) => {
-        this.setState({currentCat: e.target.value})
+        this.setState({ currentCat: e.target.value})
     }
 
     renderAllCocktails = () => {
         let sorted = this.props.cocktailsApi.sort((a, b) => this.howManyIngs(a) - this.howManyIngs(b))
         let searchArray = sorted.filter(cocktail => cocktail.name.toLowerCase().includes(this.state.searchValue.toLowerCase()))
         if(this.state.currentCat === "All"){
-            // let filtered = searchArray.filter(cocktail => cocktail.category.includes(this.state.currentCat))
             return searchArray.map(tailObj => <CocktailItem name={tailObj.name} image_url={tailObj.image_url} cocktail={tailObj} id={tailObj.id} key={tailObj.id} />)
         } else {
             let filtered = searchArray.filter(cocktail => cocktail.category.includes(this.state.currentCat))
@@ -36,7 +35,6 @@ class AllCocktails extends Component {
     componentDidMount() {
         this.props.fetchCocktails()
         this.props.fetchUserIngredients()
-        // debugger
     }
     
     renderMyCocktails = () => {
@@ -74,10 +72,6 @@ class AllCocktails extends Component {
                         <>
                         <Divider horizontal></Divider>
                         </>
-                        {/* <h2 className='content-header'>Possible Cocktails</h2>
-                        <Card.Group className='card-group' centered >
-                            {this.renderMyCocktails()}
-                        </Card.Group> */}
                 </Container>
                  : <Loading />}
             </>
@@ -86,14 +80,14 @@ class AllCocktails extends Component {
 }
 
 
-function mdp(dispatch){
+function mapDispatchToProps(dispatch){
     return{
         fetchUserIngredients: () => dispatch(getUserIngredients()),
         fetchCocktails: () => dispatch(getCocktails())
     }
 }
 
-function msp(state){
+function mapStateToProps(state){
     return {
         currentUser: state.currentUser,
         userIngApi: state.userIngApi,
@@ -102,4 +96,4 @@ function msp(state){
 }
 
 
-export default connect(msp, mdp)(AllCocktails);
+export default connect(mapStateToProps, mapDispatchToProps)(AllCocktails);
